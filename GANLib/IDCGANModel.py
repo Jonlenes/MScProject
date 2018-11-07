@@ -1,9 +1,8 @@
 import abc
 from abc import ABCMeta, abstractmethod
 
-from keras.models import Sequential
 from keras.optimizers import Adam, RMSprop
-from keras.models import load_model
+from keras.models import load_model, Sequential
 
 
 class IDCGANModel(abc.ABC):
@@ -61,7 +60,7 @@ class IDCGANModel(abc.ABC):
     @classmethod
     def compile_adversarial(self, optimizer=RMSprop(lr=0.0001, decay=3e-8), loss='binary_crossentropy', metrics=None):
         self._discriminator.trainable = False
-        self._adversarial = Sequencial()
+        self._adversarial = Sequential()          
         self._adversarial.add(self._generator)
         self._adversarial.add(self._discriminator)
         self._adversarial.compile(loss=loss, optimizer=optimizer, metrics=metrics)

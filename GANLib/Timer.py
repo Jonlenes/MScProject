@@ -1,10 +1,14 @@
-from time import time
+import time
 
 
 class Timer(object):
     def start(self):
         self.start_time = time.time()
     
+    
+    def diff(self):
+        return self.elapsed_time()
+        
     
     def elapsed_time(self):
         sec = time.time() - self.start_time
