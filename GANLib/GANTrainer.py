@@ -118,12 +118,18 @@ class GANTrainer:
 
         gen_imgs = self.GANModel.generator().predict( self.dataset_generator.nexts(r * c) )
         #Normalização pode ser necessária -  gen_imgs = 0.5 * gen_imgs + 0.5
-
+        #gen_imgs = 0.5 * gen_imgs + 0.5
+        gen_imgs = (gen_imgs * 255).astype(np.uint8)
+        
         fig, axs = plt.subplots(r, c)
         count = 0
+        
         for i in range(r):
             for j in range(c):
-                axs[i, j].imshow(gen_imgs[count, :, :, 0], cmap='gray')
+                if self.dataset_real.channel == 1:
+                    axs[i, j].imshow(gen_imgs[count, :, :, 0], cmap='gray')
+                else:
+                    axs[i, j].imshow(gen_imgs[count, :, :, ])
                 axs[i, j].axis('off')
                 count += 1
 
