@@ -1,8 +1,10 @@
 .DS_Store
 debug*
-datasets/
+datasets/bibtex/
+datasets/cityscapes/
+datasets/facades/
+datasets/night2day/
 checkpoints/
-results/
 build/
 dist/
 *.png
