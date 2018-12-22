@@ -1,0 +1,4 @@
+evento=1.0, cdp=301.270039, tempo=872.484560
+evento=1.0, cdp=298.375788, tempo=868.194531
+evento=1.0, cdp=285.351658, tempo=0.536254
+evento=1.0, cdp=302.125966, tempo=1.070683

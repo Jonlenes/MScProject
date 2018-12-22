@@ -3,6 +3,8 @@ import torch
 import numpy as np
 from PIL import Image
 import os
+import matplotlib.pyplot as plt
+import cv2
 
 
 # Converts a Tensor into an image array (numpy)
@@ -32,9 +34,12 @@ def diagnose_network(net, name='network'):
     print(mean)
 
 
-def save_image(image_numpy, image_path):
-    image_pil = Image.fromarray(image_numpy)
-    image_pil.save(image_path)
+def save_image(img, image_path):
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
+    plt.imsave(image_path, img, cmap='seismic', vmin=-img.max(), vmax=img.max())
+    # image_pil = Image.fromarray(image_numpy)
+    # image_pil.save(image_path)
+
 
 
 def print_numpy(x, val=True, shp=False):

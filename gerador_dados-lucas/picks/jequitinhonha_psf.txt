@@ -1,0 +1,14 @@
+evento=1.0, cdp=513.428820, tempo=0.864441
+evento=1.0, cdp=527.867792, tempo=0.877311
+evento=1.0, cdp=542.639207, tempo=0.976226
+evento=0.0, cdp=552.512119, tempo=1.033637
+evento=1.0, cdp=565.202403, tempo=1.021166
+evento=0.0, cdp=570.509810, tempo=1.066026
+evento=1.0, cdp=549.526251, tempo=0.971691
+evento=1.0, cdp=576.325359, tempo=1.025489
+evento=0.0, cdp=610.676689, tempo=1.125634
+evento=0.0, cdp=631.765008, tempo=1.117684
+evento=0.0, cdp=653.550463, tempo=1.085664
+evento=1.0, cdp=711.242741, tempo=1.216223
+evento=0.0, cdp=736.473422, tempo=1.379002
+evento=0.0, cdp=736.473422, tempo=1.379002
