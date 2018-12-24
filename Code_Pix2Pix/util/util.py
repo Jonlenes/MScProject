@@ -35,10 +35,10 @@ def diagnose_network(net, name='network'):
 
 
 def save_image(img, image_path):
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
-    plt.imsave(image_path, img, cmap='seismic', vmin=-img.max(), vmax=img.max())
-    # image_pil = Image.fromarray(image_numpy)
-    # image_pil.save(image_path)
+    # img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
+    # plt.imsave(image_path, img, cmap='seismic', vmin=-img.max(), vmax=img.max())
+    image_pil = Image.fromarray(img)
+    image_pil.save(image_path)
 
 
 

@@ -790,7 +790,7 @@ def multiple_event_viewer(stack_data1, stack_data2=None, stack_data3=None,
 		(plot_coord[0], plot_coord[1], plot_coord[3], plot_coord[2]))
 	print("Dimensão:", img.shape)
 	print("")
-        img1 = axes[0].imshow(img, cmap=color1, aspect='auto', vmin=vmin1, vmax=vmax1, extent=plot_coord, interpolation=None)
+	img1 = axes[0].imshow(img, cmap=color1, aspect='auto', vmin=vmin1, vmax=vmax1, extent=plot_coord, interpolation=None)
 	# Se picks for definido, plota picks
 	if not picks is None:
 		axes[0].scatter(cdp_indices, time_indices, c=picks_color, marker=picks_marker)
@@ -932,7 +932,7 @@ def load_pickle(pickle_file):
 		Dicionário com pares { nome do dado : conteúdo }
 	"""
 	with open(pickle_file, 'rb') as f:
-		data_dic = pickle.load(f)
+		data_dic = pickle.load(f, encoding='latin1')
 	print('Dados carregados de', pickle_file)
 	for key in data_dic.keys():
 		print(" -", key)
@@ -1028,7 +1028,7 @@ def apply_taper(data, taper_size):
 			print("Erro: dado menor que taper_size. Nenhum taper aplicado.")
 			return data
 		# Aplica taper na borda esquerda
-		left_taper = np.flip(taper)
+		left_taper = np.flip(taper, 0)
 		data[0:taper_size] *= left_taper
 		# Aplica taper na borda direita
 		right_taper = taper
@@ -1045,7 +1045,7 @@ def apply_taper(data, taper_size):
 		# Cria taper de cada borda 
 		taper = taper.reshape((1,taper_size))
 		right_taper = taper
-		left_taper = np.flip(taper)
+		left_taper = np.flip(taper, 1)
 		top_taper = left_taper.T
 		bottom_taper = right_taper.T
 		# Taper superior
@@ -1069,7 +1069,7 @@ def apply_taper(data, taper_size):
 		# Cria taper de cada borda 
 		taper = taper.reshape((1,taper_size))
 		right_taper = taper
-		left_taper = np.flip(taper)
+		left_taper = np.flip(taper, 1)
 		top_taper = left_taper.T
 		bottom_taper = right_taper.T
 		# Aplica taper em cada janela do dado

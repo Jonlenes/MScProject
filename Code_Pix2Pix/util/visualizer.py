@@ -119,6 +119,7 @@ class Visualizer():
                                    win=self.display_id + idx)
                     idx += 1
 
+        print("Salvando resultados em html.")
         if self.use_html and (save_result or not self.saved):  # save images to a html file
             self.saved = True
             for label, image in visuals.items():
