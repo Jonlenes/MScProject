@@ -35,10 +35,6 @@ if __name__ == '__main__':
             model.set_input(data)
             model.optimize_parameters()
 
-            if total_steps % opt.display_freq == 0:
-                save_result = total_steps % opt.update_html_freq == 0
-                visualizer.display_current_results(model.get_current_visuals(), epoch, save_result)
-
             if total_steps % opt.print_freq == 0:
                 losses = model.get_current_losses()
                 t = (time.time() - iter_start_time) / opt.batch_size
@@ -52,6 +48,11 @@ if __name__ == '__main__':
                 model.save_networks(save_suffix)
 
             iter_data_time = time.time()
+        
+        # salvando os resultados
+        save_result = total_steps % opt.update_html_freq == 0
+        visualizer.display_current_results(model.get_current_visuals(), epoch, save_result)
+
         if epoch % opt.save_epoch_freq == 0:
             print('saving the model at the end of epoch %d, iters %d' % (epoch, total_steps))
             model.save_networks('latest')

@@ -2,6 +2,8 @@ import os
 import torch
 from collections import OrderedDict
 from . import networks
+from util import util
+import cv2
 
 
 class BaseModel():
@@ -27,7 +29,7 @@ class BaseModel():
         self.model_names = []
         self.visual_names = []
         self.image_paths = []
-
+        
     def set_input(self, input):
         pass
 
@@ -76,6 +78,18 @@ class BaseModel():
         for name in self.visual_names:
             if isinstance(name, str):
                 visual_ret[name] = getattr(self, name)
+        
+        keys = visual_ret.keys()
+        if 'real_B' in keys and 'fake_B' in keys:
+            
+            fake_B = util.tensor2im(visual_ret['fake_B'])
+            real_B = util.tensor2im(visual_ret['real_B'])
+            
+            fake_B = cv2.cvtColor(fake_B, cv2.COLOR_BGR2GRAY)
+            real_B = cv2.cvtColor(real_B, cv2.COLOR_BGR2GRAY)
+            
+            visual_ret['Difference'] = real_B - fake_B
+            
         return visual_ret
 
     # return traning losses/errors. train.py will print out these errors as debugging information
