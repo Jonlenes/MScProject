@@ -82,13 +82,14 @@ class BaseModel():
         keys = visual_ret.keys()
         if 'real_B' in keys and 'fake_B' in keys:
             
-            fake_B = util.tensor2im(visual_ret['fake_B'])
-            real_B = util.tensor2im(visual_ret['real_B'])
+            # fake_B = util.tensor2im(visual_ret['fake_B'])
+            # real_B = util.tensor2im(visual_ret['real_B'])
             
-            fake_B = cv2.cvtColor(fake_B, cv2.COLOR_BGR2GRAY)
-            real_B = cv2.cvtColor(real_B, cv2.COLOR_BGR2GRAY)
+            # fake_B = cv2.cvtColor(fake_B, cv2.COLOR_BGR2GRAY)
+            # real_B = cv2.cvtColor(real_B, cv2.COLOR_BGR2GRAY)
             
-            visual_ret['Difference'] = real_B - fake_B
+            visual_ret['Difference'] = visual_ret['real_B'] - visual_ret['fake_B']
+            print(visual_ret['Difference'].min(), visual_ret['Difference'].max())
             
         return visual_ret
 

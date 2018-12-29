@@ -32,7 +32,11 @@ def save_images(webpage, visuals, image_path, aspect_ratio=1.0, width=256):
             im = imresize(im, (h, int(w * aspect_ratio)), interp='bicubic')
         if aspect_ratio < 1.0:
             im = imresize(im, (int(h / aspect_ratio), w), interp='bicubic')
-        util.save_image(im, save_path)
+        
+        if 'Difference' is label :
+            util.save_image_seismic(im, save_path)
+        else:
+            util.save_image(im, save_path)
 
         ims.append(image_name)
         txts.append(label)
