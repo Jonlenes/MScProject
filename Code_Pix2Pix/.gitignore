@@ -4,7 +4,6 @@ datasets/bibtex/
 datasets/cityscapes/
 datasets/facades/
 datasets/night2day/
-checkpoints/
 build/
 dist/
 torch.egg-info/
