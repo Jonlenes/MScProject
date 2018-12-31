@@ -33,10 +33,7 @@ def save_images(webpage, visuals, image_path, aspect_ratio=1.0, width=256):
         if aspect_ratio < 1.0:
             im = imresize(im, (int(h / aspect_ratio), w), interp='bicubic')
         
-        if 'Difference' is label :
-            util.save_image_seismic(im, save_path)
-        else:
-            util.save_image(im, save_path)
+        util.save_image(im, save_path)
 
         ims.append(image_name)
         txts.append(label)
@@ -123,7 +120,6 @@ class Visualizer():
                                    win=self.display_id + idx)
                     idx += 1
 
-        print("Salvando resultados em html.")
         if self.use_html and (save_result or not self.saved):  # save images to a html file
             self.saved = True
             for label, image in visuals.items():

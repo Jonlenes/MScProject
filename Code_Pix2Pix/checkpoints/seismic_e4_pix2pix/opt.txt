@@ -1,0 +1,40 @@
+----------------- Options ---------------
+             aspect_ratio: 1.0                           
+               batch_size: 1                             
+          checkpoints_dir: ./checkpoints                 
+                 dataroot: ./datasets/seismic_e4         	[default: None]
+             dataset_mode: aligned                       
+                direction: AtoB                          
+          display_winsize: 400                           
+                    epoch: latest                        
+                     eval: False                         
+                 fineSize: 256                           
+                  gpu_ids: 0                             
+                init_gain: 0.02                          
+                init_type: normal                        
+                 input_nc: 1                             	[default: 3]
+                  isTrain: False                         	[default: None]
+                 loadSize: 256                           
+                load_iter: 0                             	[default: 0]
+         max_dataset_size: inf                           
+                    model: pix2pix                       	[default: test]
+               n_layers_D: 3                             
+                     name: seismic_e4_pix2pix            	[default: experiment_name]
+                      ndf: 64                            
+                     netD: basic                         
+                     netG: unet_256                      
+                      ngf: 64                            
+               no_dropout: False                         
+                  no_flip: False                         
+                     norm: batch                         
+                    ntest: inf                           
+                 num_test: 100                           
+              num_threads: 8                             
+                output_nc: 1                             	[default: 3]
+                    phase: test                          
+           resize_or_crop: resize_and_crop               
+              results_dir: ./results/                    
+           serial_batches: False                         
+                   suffix:                               
+                  verbose: False                         
+----------------- End -------------------

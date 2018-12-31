@@ -4,8 +4,14 @@ from data import CreateDataLoader
 from models import create_model
 from util.visualizer import Visualizer
 from util.Timer import Timer
+# import sys
 
 if __name__ == '__main__':
+    
+    # orig_stdout = sys.stdout
+    # f = open('out.txt', 'w')
+    # sys.stdout = f
+    
     opt = TrainOptions().parse()
     data_loader = CreateDataLoader(opt)
     dataset = data_loader.load_data()
@@ -49,6 +55,8 @@ if __name__ == '__main__':
 
             iter_data_time = time.time()
         
+        print("Tempo total de treinamento: ", timer.diff())
+        
         # salvando os resultados
         save_result = total_steps % opt.update_html_freq == 0
         visualizer.display_current_results(model.get_current_visuals(), epoch, save_result)
@@ -63,3 +71,7 @@ if __name__ == '__main__':
         model.update_learning_rate()
         
     print("Tempo total de treinamento: ", timer.diff())
+    
+    # sys.stdout = orig_stdout
+    # f.close()
+
