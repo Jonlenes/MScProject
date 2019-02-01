@@ -100,7 +100,7 @@ class GANTrainer:
             # Executando as operações de disco em outra thread
             thread = Thread(target = show_and_save_datas)
             thread.start()
-            thread.join()
+            thread.join() # Com a Thread a execução vai ficar mais lenta do que sem, devido ao Join aqui.
             
             # Print line
             print("-----------------------------------------------------------------")
