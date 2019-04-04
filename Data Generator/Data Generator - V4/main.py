@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use("Qt5Agg")
 import matplotlib.pyplot as plt
 import random
 import cv2
@@ -20,6 +22,14 @@ def normalize(x, lower=-1, upper=1):
     return ((x - x.min()) / (x.max() - x.min()) * (upper - lower) + lower)
 
 
+def plot_on_nparray(array, x, y):
+    x = np.round(x).astype(int)
+    y = np.round(y).astype(int)	
+    valid_idxs = np.where(np.logical_and((y >= 0), (y < panel_side_base)))[0]
+    reflexivity = random.uniform(-1,1)
+    array[ y[valid_idxs], x[valid_idxs] ] = reflexivity
+        
+
 def generate_curves(funcs, func_name, verbose=True):
     # Config matplotlib to plot
     MatplotlibUtil.full_frame(panel_side_base, panel_side_base)
@@ -33,15 +43,10 @@ def generate_curves(funcs, func_name, verbose=True):
     y_pos = -int(0.3*panel_side_base)
     while y_pos < int(1.3 * panel_side_base):
         x, y = funcs( func_name )
-        y = y_pos + np.round(y).astype(int)
-        
-        valid_idxs = np.where(np.logical_and((y >= 0), (y < panel_side_base)))[0]
-        reflexivity = random.uniform(-1,1)
-        panel[ y[valid_idxs], x[valid_idxs] ] = reflexivity
-        
+        y = y_pos + y
+        plot_on_nparray(panel, x, y)
         y_pos += random.randint(10, 20)
-        #y_pos += random.randint(50, 100)
-    
+
     return panel
 
 
@@ -59,7 +64,7 @@ if __name__ == '__main__':
     number_of_funs = len(funcs.f_names) 
 
     for i in tqdm(range(1)):
-        func_name = 'f_domo' # funcs.f_names[ random.randint(0, number_of_funs - 1 ) ]
+        func_name = 'f1' # funcs.f_names[ random.randint(0, number_of_funs - 1 ) ]
         panel = generate_curves( funcs, func_name, False )
     
         if debug: 
