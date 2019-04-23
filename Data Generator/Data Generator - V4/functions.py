@@ -1,7 +1,7 @@
 import random
 import numpy as np
 from config import panel_side_base
-
+from img_util import MatplotlibUtil
 
 def _bring_to_zero(array):
     return array - array.min()
