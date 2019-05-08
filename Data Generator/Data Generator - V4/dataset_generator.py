@@ -100,4 +100,4 @@ def create_dataset(n_samples, clear_folder=False):
 
 
 if __name__ == '__main__':
-    create_dataset(100)
+    create_dataset(10000)
