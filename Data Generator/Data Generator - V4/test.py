@@ -1,3 +1,88 @@
+import matplotlib
+import matplotlib.pyplot as plt
+import random
+import cv2
+import math
+import numpy as np
+
+from img_util import MatplotlibUtil, set_img_label
+from functions import Functions, _bring_to_zero, scale
+from io_util import show, save
+from config import panel_side_base
+from timer import Timer
+from tqdm import tqdm
+from scipy.signal import convolve2d
+import matplotlib.pyplot as plt
+from sample_generator import plot_on_nparray
+
+
+def test():
+	def rotate(x, y, a):
+		return (x*np.cos(a) - y*np.sin(a), x * np.sin(a) + y * np.cos(a));
+
+	def scale_vector(x, y, scale):
+		return Vetor(x * scale, y * scale);
+
+	def d(x, y):
+		return np.sqrt(x**2 + y**2)
+	
+	a = 200
+	b = 100
+
+	angle = (60 * np.pi) / 180.0
+
+	x_ok = a * np.cos( angle )
+	y_ok = b * np.sin( angle )
+
+	print("(X, Y) = ", x_ok, y_ok)
+	print("Len =", d(x_ok, y_ok))
+
+	h = np.sqrt(x_ok ** 2 + y_ok ** 2)
+	print("h = ", h)
+	x, y = rotate(h, 0, angle)
+	print("(X, Y) = ", x, y)
+	print("Len =", d(x, y))
+            
+        
+
+
+if __name__ == '__main__': 
+	f = Functions()
+	xs, ys = f.f_e_ellipse()
+	# x, y = scale(np.array(x), np.array(y), panel_side_base, (0, panel_side_base))
+	panel = np.zeros((panel_side_base + 10, panel_side_base + 10))
+	"""
+	from scipy.interpolate import interp1d
+	new_x, new_y = [], []
+	len_ = len(xs[-1])
+	for i in range(len_ - 2): #, ys[-1]):
+		x = xs[-1][i:(i+2)%len_]
+		y = ys[-1][i:(i+2)%len_]
+
+		print(x.shape, y.shape)
+
+		f = interp1d(x, y)
+	 	x = np.linspace(x.min(), x.max())
+		new_x.append( x )
+		new_y.append( f(x) )
+
+	plt.plot(new_x, new_y, 'o', linewidth=1)
+	"""
+
+
+	for a, b in zip(xs, ys):
+		plot_on_nparray(panel, a, b)
+		# from scipy.interpolate import interp1d
+		# f = interp1d(a, b)
+		# x = np.linspace(a.min(), a.max(), num=11, endpoint=True)
+		# print( len(a), len(b) )
+		# print( a )
+		# plt.plot(a, b)
+		# break
+	# plt.show()
+	show(panel, 'Sts', 'seismic')
+
+"""
 import numpy as np
 import matplotlib.pyplot as plt
 from time import time
@@ -83,3 +168,34 @@ if __name__ == '__main__':
 		panel = range_normalize_std( panel )
 		show(panel, vmin=-1, vmax=1, color='seismic')
 		# plt.clf()
+"""
+
+# For each curve, set 'refletivity' as [-1, +1] value
+# back = panel == 0
+# panel[ back ] = panel.mean()
+# panel = normalize( panel )
+# panel[ back ] = 0
+
+
+# Fill the panel with the curves
+"""y_pos = -(0.3*panel_side_base)
+while y_pos < int(1.3 * panel_side_base): 
+    x, y = funcs( func_name )
+    # x, y = scale(x, y, 25, (0, panel_side_base))
+    
+    plt.plot(x, y + y_pos, linewidth=1, color=str(np.random.uniform(.5, 1))) # 
+    y_pos += random.randint(15, 15)
+
+# plt.show()
+
+# Export the data and convert to Gray
+panel = MatplotlibUtil.fig2data( plt.gcf() )
+panel = cv2.cvtColor(panel, cv2.COLOR_RGB2GRAY)
+
+plt.clf()
+if verbose:
+    print( panel.shape, panel.min(), panel.max() )
+    
+# Return negative panel normalized between 0 and 1
+return (255 - panel) / 255."""
+    
