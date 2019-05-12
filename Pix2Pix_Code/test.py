@@ -5,6 +5,7 @@ from models import create_model
 from util.visualizer import save_images
 from util import html
 import numpy as np
+from util import tensor2im
 
 
 def fnorm(x):
@@ -47,7 +48,7 @@ if __name__ == '__main__':
         print('processing (%04d)-th image... %s' % (i, img_path), end="")
         save_images(webpage, visuals, img_path, aspect_ratio=opt.aspect_ratio, width=opt.display_winsize)
     
-        acc = score(model.real_A, model.fake_B)
+        acc = score(tensor2im(model.real_A), tensor2im(model.fake_B))
         print("Acc:", acc)
         total_acc += acc
         count += 1
