@@ -36,14 +36,14 @@ if __name__ == '__main__':
 
     total_acc, count = 0, 0
     for i, data in enumerate(dataset):
-        if i >= opt.num_test:
-            break
+        #if i >= opt.num_test:
+        #    break
         model.set_input(data)
         model.test()
         visuals = model.get_current_visuals()
         img_path = model.get_image_paths()
-        if i % 5 == 0:
-            print('processing (%04d)-th image... %s' % (i, img_path), end="")
+        #if i % 5 == 0:
+        print('processing (%04d)-th image... %s' % (i, img_path), end="")
         save_images(webpage, visuals, img_path, aspect_ratio=opt.aspect_ratio, width=opt.display_winsize)
     
         acc = score(model.real_A, model.fake_B)
