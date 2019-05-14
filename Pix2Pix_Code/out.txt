@@ -1,0 +1,63 @@
+----------------- Options ---------------
+             aspect_ratio: 1.0                           
+               batch_size: 1                             
+          checkpoints_dir: ./checkpoints                 
+                 dataroot: ./datasets/seismic_e5         	[default: None]
+             dataset_mode: aligned                       
+                direction: AtoB                          
+          display_winsize: 400                           
+                    epoch: 635                           	[default: latest]
+                     eval: True                          	[default: False]
+                 fineSize: 256                           
+                  gpu_ids: 0                             
+                init_gain: 0.02                          
+                init_type: normal                        
+                 input_nc: 1                             	[default: 3]
+                  isTrain: False                         	[default: None]
+                 loadSize: 256                           
+                load_iter: 0                             	[default: 0]
+         max_dataset_size: inf                           
+                    model: pix2pix                       	[default: test]
+               n_layers_D: 3                             
+                     name: seismic_e5_pix2pix            	[default: experiment_name]
+                      ndf: 64                            
+                     netD: basic                         
+                     netG: unet_256                      
+                      ngf: 64                            
+               no_dropout: False                         
+                  no_flip: False                         
+                     norm: batch                         
+                    ntest: inf                           
+                 num_test: 100                           
+              num_threads: 8                             
+                output_nc: 1                             	[default: 3]
+                    phase: val                           	[default: test]
+           resize_or_crop: resize_and_crop               
+              results_dir: ./results/                    
+           serial_batches: False                         
+                   suffix:                               
+                  verbose: False                         
+----------------- End -------------------
+dataset [AlignedDataset] was created
+initialize network with normal
+model [Pix2PixModel] was created
+loading the model from ./checkpoints/seismic_e5_pix2pix/635_net_G.pth
+---------- Networks initialized -------------
+[Network G] Total number of parameters : 54.408 M
+-----------------------------------------------
+processing (0000)-th image... ['./datasets/seismic_e5/val/10000_wave.png']y_pred:  -0.8639242649078369 0.8980020880699158
+Acc: 0.17334829974027244
+processing (0001)-th image... ['./datasets/seismic_e5/val/10005_wave.png']y_pred:  -0.9781473875045776 0.9162485599517822
+Acc: -22.755389931684398
+processing (0002)-th image... ['./datasets/seismic_e5/val/10010_f2.png']y_pred:  -0.903533399105072 0.9705209136009216
+Acc: 24.977942443269363
+processing (0003)-th image... ['./datasets/seismic_e5/val/10016_f2.png']y_pred:  -0.9516380429267883 0.9491174221038818
+Acc: 5.653546580876922
+processing (0004)-th image... ['./datasets/seismic_e5/val/10017_f2.png']y_pred:  -0.8940557837486267 0.8672246932983398
+Acc: -13.029837636447606
+processing (0005)-th image... ['./datasets/seismic_e5/val/10044_wave.png']y_pred:  -0.983934223651886 0.7332384586334229
+Acc: -32.3804131137633
+processing (0006)-th image... ['./datasets/seismic_e5/val/10049_wave.png']y_pred:  -0.9274123311042786 0.9182280898094177
+Acc: -10.316401417386212
+-47.677204775394955 7
+Accuracy: -6.81.

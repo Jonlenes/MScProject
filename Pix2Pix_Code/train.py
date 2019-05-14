@@ -4,7 +4,9 @@ from data import CreateDataLoader
 from models import create_model
 from util.visualizer import Visualizer
 from util.Timer import Timer
+from util.util import tensor2im
 from util.eval_metric import score
+
 
 if __name__ == '__main__':
     
