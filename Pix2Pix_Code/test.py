@@ -6,13 +6,7 @@ from util.visualizer import save_images
 from util import html
 import numpy as np
 from util import tensor2im
-
-
-def fnorm(x):
-    return np.sqrt((x**2).sum())
-
-def score(y_true, y_pred):
-    return 100*(1 - 2*fnorm(y_true - y_pred) / (fnorm(y_true) + fnorm(y_pred))) 
+from util.eval_metric import score
 
 
 if __name__ == '__main__':
@@ -49,7 +43,7 @@ if __name__ == '__main__':
         save_images(webpage, visuals, img_path, aspect_ratio=opt.aspect_ratio, width=opt.display_winsize)
     
         acc = score(tensor2im(model.real_A), tensor2im(model.fake_B))
-        print("Acc:", acc)
+        print(" Acc:", acc)
         total_acc += acc
         count += 1
 

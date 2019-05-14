@@ -4,7 +4,7 @@ from data import CreateDataLoader
 from models import create_model
 from util.visualizer import Visualizer
 from util.Timer import Timer
-# import sys
+from util.eval_metric import score
 
 if __name__ == '__main__':
     
@@ -40,6 +40,9 @@ if __name__ == '__main__':
             epoch_iter += opt.batch_size
             model.set_input(data)
             model.optimize_parameters()
+
+            acc = score(tensor2im(model.real_A), tensor2im(model.fake_B))
+            print("Size:", len(model.real_A), "Acc:", acc)
 
             if total_steps % opt.print_freq == 0:
                 losses = model.get_current_losses()
