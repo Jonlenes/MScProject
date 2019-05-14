@@ -45,19 +45,47 @@ loading the model from ./checkpoints/seismic_e5_pix2pix/635_net_G.pth
 ---------- Networks initialized -------------
 [Network G] Total number of parameters : 54.408 M
 -----------------------------------------------
-processing (0000)-th image... ['./datasets/seismic_e5/val/10000_wave.png']y_pred:  -0.8639242649078369 0.8980020880699158
-Acc: 0.17334829974027244
-processing (0001)-th image... ['./datasets/seismic_e5/val/10005_wave.png']y_pred:  -0.9781473875045776 0.9162485599517822
-Acc: -22.755389931684398
-processing (0002)-th image... ['./datasets/seismic_e5/val/10010_f2.png']y_pred:  -0.903533399105072 0.9705209136009216
-Acc: 24.977942443269363
-processing (0003)-th image... ['./datasets/seismic_e5/val/10016_f2.png']y_pred:  -0.9516380429267883 0.9491174221038818
-Acc: 5.653546580876922
-processing (0004)-th image... ['./datasets/seismic_e5/val/10017_f2.png']y_pred:  -0.8940557837486267 0.8672246932983398
-Acc: -13.029837636447606
-processing (0005)-th image... ['./datasets/seismic_e5/val/10044_wave.png']y_pred:  -0.983934223651886 0.7332384586334229
-Acc: -32.3804131137633
-processing (0006)-th image... ['./datasets/seismic_e5/val/10049_wave.png']y_pred:  -0.9274123311042786 0.9182280898094177
-Acc: -10.316401417386212
--47.677204775394955 7
-Accuracy: -6.81.
+processing (0000)-th image... ['./datasets/seismic_e5/val/10000_wave.png'] Acc: 0.17334830128763468
+processing (0001)-th image... ['./datasets/seismic_e5/val/10005_wave.png'] Acc: -22.755389923015066
+processing (0002)-th image... ['./datasets/seismic_e5/val/10010_f2.png'] Acc: 24.977942443520128
+processing (0003)-th image... ['./datasets/seismic_e5/val/10016_f2.png'] Acc: 5.653546600246662
+processing (0004)-th image... ['./datasets/seismic_e5/val/10017_f2.png'] Acc: -13.029837621732732
+processing (0005)-th image... ['./datasets/seismic_e5/val/10044_wave.png'] Acc: -32.380413051923625
+processing (0006)-th image... ['./datasets/seismic_e5/val/10049_wave.png'] Acc: -10.31640142440211
+processing (0007)-th image... ['./datasets/seismic_e5/val/10051_wave.png'] Acc: 27.098349861019077
+processing (0008)-th image... ['./datasets/seismic_e5/val/10053_wave.png'] Acc: -10.475063034478804
+processing (0009)-th image... ['./datasets/seismic_e5/val/10055_wave.png'] Acc: -13.457948398961861
+processing (0010)-th image... ['./datasets/seismic_e5/val/10056_wave.png'] Acc: -23.280671582807912
+processing (0011)-th image... ['./datasets/seismic_e5/val/10061_wave.png'] Acc: -24.649564790489762
+processing (0012)-th image... ['./datasets/seismic_e5/val/10063_wave.png'] Acc: -23.17994897568829
+processing (0013)-th image... ['./datasets/seismic_e5/val/10081_f1.png'] Acc: -13.838424691135787
+processing (0014)-th image... ['./datasets/seismic_e5/val/10092_f1.png'] Acc: -6.66271636348148
+processing (0015)-th image... ['./datasets/seismic_e5/val/10093_f1.png'] Acc: -5.277495698218715
+processing (0016)-th image... ['./datasets/seismic_e5/val/10096_f1.png'] Acc: -35.490089121573256
+processing (0017)-th image... ['./datasets/seismic_e5/val/100_f1.png'] Acc: 45.61602601998271
+processing (0018)-th image... ['./datasets/seismic_e5/val/1010_f12.png'] Acc: 35.92969303978932
+processing (0019)-th image... ['./datasets/seismic_e5/val/10112_wave.png'] Acc: 1.1181905535543768
+processing (0020)-th image... ['./datasets/seismic_e5/val/10113_wave.png'] Acc: -40.17263836352794
+processing (0021)-th image... ['./datasets/seismic_e5/val/10115_wave.png'] Acc: -49.04463406765165
+processing (0022)-th image... ['./datasets/seismic_e5/val/10127_wave.png'] Acc: -44.48810596656691
+processing (0023)-th image... ['./datasets/seismic_e5/val/10128_wave.png'] Acc: 6.349631108799658
+processing (0024)-th image... ['./datasets/seismic_e5/val/10130_wave.png'] Acc: -10.901973059800607
+processing (0025)-th image... ['./datasets/seismic_e5/val/10148_wave.png'] Acc: 32.82578566600256
+processing (0026)-th image... ['./datasets/seismic_e5/val/10156_f3.png'] Acc: 5.053506527293228
+processing (0027)-th image... ['./datasets/seismic_e5/val/10158_f3.png'] Acc: 10.721724073927085
+processing (0028)-th image... ['./datasets/seismic_e5/val/1015_f12.png'] Acc: 26.220437643265303
+processing (0029)-th image... ['./datasets/seismic_e5/val/10162_f3.png'] Acc: 8.284496571909939
+processing (0030)-th image... ['./datasets/seismic_e5/val/10165_f3.png'] Acc: 13.172939603808398
+processing (0031)-th image... ['./datasets/seismic_e5/val/10172_f3.png'] Acc: 18.586977256026614
+processing (0032)-th image... ['./datasets/seismic_e5/val/10176_f12.png'] Acc: -7.696160972619226
+processing (0033)-th image... ['./datasets/seismic_e5/val/10180_f12.png'] Acc: 37.76388335425186
+processing (0034)-th image... ['./datasets/seismic_e5/val/10196_f12.png'] Acc: 26.03398985053268
+processing (0035)-th image... ['./datasets/seismic_e5/val/1019_f12.png'] Acc: 40.09240214617746
+processing (0036)-th image... ['./datasets/seismic_e5/val/10201_ellipse.png'] Acc: -2.4403264271541936
+processing (0037)-th image... ['./datasets/seismic_e5/val/10206_ellipse.png'] Acc: 13.483626196969546
+processing (0038)-th image... ['./datasets/seismic_e5/val/10217_ellipse.png'] Acc: -7.089249535482911
+processing (0039)-th image... ['./datasets/seismic_e5/val/1021_f12.png'] Acc: -0.966999634302157
+processing (0040)-th image... ['./datasets/seismic_e5/val/10232_f21.png'] Acc: -12.1725240734182
+processing (0041)-th image... ['./datasets/seismic_e5/val/10237_f21.png'] Acc: -9.685353951177266
+processing (0042)-th image... ['./datasets/seismic_e5/val/10268_ellipse.png'] Acc: 27.27426819014568
+processing (0043)-th image... ['./datasets/seismic_e5/val/10269_ellipse.png']

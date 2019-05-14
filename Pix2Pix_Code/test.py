@@ -5,7 +5,7 @@ from models import create_model
 from util.visualizer import save_images
 from util import html
 import numpy as np
-from util import tensor2im
+from util.util import tensor2im
 from util.eval_metric import score
 
 
