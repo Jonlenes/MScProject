@@ -32,8 +32,8 @@ if __name__ == '__main__':
 
     total_acc, count = 0, 0
     for i, data in enumerate(dataset):
-        #if i >= opt.num_test:
-        #    break
+        if i >= 20:
+            break
         model.set_input(data)
         model.test()
         visuals = model.get_current_visuals()
@@ -47,6 +47,6 @@ if __name__ == '__main__':
         total_acc += acc
         count += 1
 
-    print("Accuracy: %.2f." % total_acc / count)
+    print("Accuracy: %.2f." % (total_acc / count))
     # save the website
     webpage.save()
