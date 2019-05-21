@@ -31,6 +31,7 @@ if __name__ == '__main__':
         epoch_start_time = time.time()
         iter_data_time = time.time()
         epoch_iter = 0
+        acumulate_acc = 0
 
         for i, data in enumerate(dataset):
             iter_start_time = time.time()
@@ -43,9 +44,8 @@ if __name__ == '__main__':
             model.set_input(data)
             model.optimize_parameters()
 
-            acc = score(tensor2im(model.real_A), tensor2im(model.fake_B))
-            print("Size:", len(model.real_A), "Acc:", acc)
-
+            acumulate_acc += score(tensor2im(model.real_A), tensor2im(model.fake_B))
+            
             if total_steps % opt.print_freq == 0:
                 losses = model.get_current_losses()
                 t = (time.time() - iter_start_time) / opt.batch_size
@@ -53,14 +53,14 @@ if __name__ == '__main__':
                 if opt.display_id > 0:
                     visualizer.plot_current_losses(epoch, float(epoch_iter) / dataset_size, opt, losses)
 
-            if total_steps % opt.save_latest_freq == 0:
+            """ if total_steps % opt.save_latest_freq == 0:
                 print('saving the latest model (epoch %d, total_steps %d)' % (epoch, total_steps))
                 save_suffix = 'iter_%d' % total_steps if opt.save_by_iter else 'latest'
-                model.save_networks(save_suffix)
+                model.save_networks(save_suffix)"""
 
             iter_data_time = time.time()
         
-        print("Tempo total de treinamento: ", timer.diff())
+        # print("Epoch training time:", timer.diff())
         
         # salvando os resultados
         save_result = total_steps % opt.update_html_freq == 0
@@ -71,11 +71,11 @@ if __name__ == '__main__':
             model.save_networks('latest')
             model.save_networks(epoch)
 
-        print('End of epoch %d / %d \t Time Taken: %d sec' %
-              (epoch, opt.niter + opt.niter_decay, time.time() - epoch_start_time))
+        print('End of epoch %d / %d \t Time Taken: %d sec \t Acc: %d' %
+              (epoch, opt.niter + opt.niter_decay, time.time() - epoch_start_time, int(acumulate_acc/len(dataset))))
         model.update_learning_rate()
         
-    print("Tempo total de treinamento: ", timer.diff())
+    print("All traning time:", timer.diff())
     
     # sys.stdout = orig_stdout
     # f.close()

@@ -5,9 +5,11 @@ dependencies:
 - python=3.5.5
 - pytorch=0.4
 - scipy
+- pip
 - pip:
   - dominate==2.3.1
-  - git+https://github.com/pytorch/vision.git
+  - torch
+  - torchvision
   - Pillow==5.0.0
   - numpy==1.14.1
   - visdom==0.1.7
