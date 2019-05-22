@@ -44,7 +44,7 @@ if __name__ == '__main__':
             model.set_input(data)
             model.optimize_parameters()
 
-            acumulate_acc += score(tensor2im(model.real_A), tensor2im(model.fake_B))
+            acumulate_acc += score(tensor2im(model.real_B), tensor2im(model.fake_B))
             
             """if total_steps % opt.print_freq == 0:
                 losses = model.get_current_losses()
@@ -58,7 +58,7 @@ if __name__ == '__main__':
                 save_suffix = 'iter_%d' % total_steps if opt.save_by_iter else 'latest'
                 model.save_networks(save_suffix)"""
             
-            print(i, score(tensor2im(model.real_A), tensor2im(model.fake_B)))
+            # print(i, score(tensor2im(model.real_A), tensor2im(model.fake_B)))
             iter_data_time = time.time()
         
 

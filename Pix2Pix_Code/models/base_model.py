@@ -82,6 +82,7 @@ class BaseModel():
         keys = visual_ret.keys()
         if 'real_B' in keys and 'fake_B' in keys:
             visual_ret['Difference'] = util.tensor2im(visual_ret['real_B']).reshape(256, 256) - util.tensor2im(visual_ret['fake_B']).reshape(256, 256)
+            # print( "min:", visual_ret['Difference'].min(), "max:", visual_ret['Difference'].max(), "sum:", visual_ret['Difference'].sum(), "shape:", visual_ret['Difference'].shape)
             
         return visual_ret
 

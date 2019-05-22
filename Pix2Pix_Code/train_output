@@ -56,3 +56,15 @@
          update_html_freq: 1000                          
                   verbose: False                         
 ----------------- End -------------------
+dataset [AlignedDataset] was created
+#training images = 10000
+initialize network with normal
+initialize network with normal
+model [Pix2PixModel] was created
+loading the model from ./checkpoints/seismic_e5_pix2pix_v2/latest_net_G.pth
+loading the model from ./checkpoints/seismic_e5_pix2pix_v2/latest_net_D.pth
+---------- Networks initialized -------------
+[Network G] Total number of parameters : 54.408 M
+[Network D] Total number of parameters : 2.765 M
+-----------------------------------------------
+create web directory ./checkpoints/seismic_e5_pix2pix_v2/web...

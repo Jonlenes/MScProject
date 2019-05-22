@@ -17,7 +17,7 @@ class AlignedDataset(BaseDataset):
         self.root = opt.dataroot
         self.dir_AB = os.path.join(opt.dataroot, opt.phase)
         self.AB_paths = sorted(make_dataset(self.dir_AB))
-        assert(opt.resize_or_crop == 'resize_and_crop')
+        # assert(opt.resize_or_crop == 'resize_and_crop')
 
     def __getitem__(self, index):
         AB_path = self.AB_paths[index]

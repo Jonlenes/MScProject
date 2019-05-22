@@ -42,8 +42,9 @@ if __name__ == '__main__':
         print('processing (%04d)-th image... %s' % (i, img_path), end="")
         save_images(webpage, visuals, img_path, aspect_ratio=opt.aspect_ratio, width=opt.display_winsize)
     
-        acc = score(tensor2im(model.real_A), tensor2im(model.fake_B))
-        print(" Acc:", acc)
+        acc = score(tensor2im(model.real_B), tensor2im(model.fake_B))
+        print(" Acc:", acc, )
+        # print( "2 - min:", tensor2im(model.real_A).min(), "max:", tensor2im(model.real_A).max(), "sum:", tensor2im(model.real_A).sum(), "shape:", tensor2im(model.real_A).shape)
         total_acc += acc
         count += 1
 
