@@ -2,7 +2,7 @@
                batch_size: 1                             
                     beta1: 0.5                           
           checkpoints_dir: ./checkpoints                 
-           continue_train: False                         
+           continue_train: True                          	[default: False]
                  dataroot: ./datasets/seismic_e5         	[default: None]
              dataset_mode: aligned                       
                 direction: AtoB                          
@@ -14,7 +14,7 @@
            display_server: http://localhost              
           display_winsize: 400                           
                     epoch: latest                        
-              epoch_count: 1                             
+              epoch_count: 288                           	[default: 1]
                  fineSize: 256                           
                   gpu_ids: 0                             
                 init_gain: 0.02                          

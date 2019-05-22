@@ -46,21 +46,26 @@ if __name__ == '__main__':
 
             acumulate_acc += score(tensor2im(model.real_A), tensor2im(model.fake_B))
             
-            if total_steps % opt.print_freq == 0:
+            """if total_steps % opt.print_freq == 0:
                 losses = model.get_current_losses()
                 t = (time.time() - iter_start_time) / opt.batch_size
                 visualizer.print_current_losses(epoch, epoch_iter, losses, t, t_data)
                 if opt.display_id > 0:
                     visualizer.plot_current_losses(epoch, float(epoch_iter) / dataset_size, opt, losses)
 
-            """ if total_steps % opt.save_latest_freq == 0:
+            if total_steps % opt.save_latest_freq == 0:
                 print('saving the latest model (epoch %d, total_steps %d)' % (epoch, total_steps))
                 save_suffix = 'iter_%d' % total_steps if opt.save_by_iter else 'latest'
                 model.save_networks(save_suffix)"""
 
             iter_data_time = time.time()
         
-        # print("Epoch training time:", timer.diff())
+
+        losses = model.get_current_losses()
+        visualizer.print_current_losses(epoch, epoch_iter, losses, 0, 0)
+        if opt.display_id > 0:
+            visualizer.plot_current_losses(epoch, epoch_iter, opt, losses)
+        print("Training time so far:", timer.diff())
         
         # salvando os resultados
         save_result = total_steps % opt.update_html_freq == 0
@@ -69,8 +74,9 @@ if __name__ == '__main__':
         if epoch % opt.save_epoch_freq == 0:
             print('saving the model at the end of epoch %d, iters %d' % (epoch, total_steps))
             model.save_networks('latest')
-            model.save_networks(epoch)
-
+            # model.save_networks(epoch)
+        
+        print("Len:", len(dataset))
         print('End of epoch %d / %d \t Time Taken: %d sec \t Acc: %d' %
               (epoch, opt.niter + opt.niter_decay, time.time() - epoch_start_time, int(acumulate_acc/len(dataset))))
         model.update_learning_rate()

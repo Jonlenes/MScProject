@@ -87,7 +87,7 @@ def generate_curves(funcs, func_name, verbose=True):
             plot_on_nparray(panel, x, y)
             y_pos += random.randint(10, 20)
 
-    # Add faulting *****************************************************************************************
+    # Add faulting ***********************************
     # Calcula qual o afastamento minimo na quebra
     min_offset = calculate_min_offset(frequency, dt=dt)
     max_offset = 20
@@ -98,7 +98,7 @@ def generate_curves(funcs, func_name, verbose=True):
     
     # Gera o painel com a quebra escolhida
     panel = add_faulting(angle_rad=angle_rad, panel_a=panel, offset=offset, output_shape=panel.shape)
-    # Add faulting *****************************************************************************************
+    # Add faulting ***********************************
 
     # Two panels
     panel_ricker = panel
