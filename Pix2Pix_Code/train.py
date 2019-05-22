@@ -57,7 +57,8 @@ if __name__ == '__main__':
                 print('saving the latest model (epoch %d, total_steps %d)' % (epoch, total_steps))
                 save_suffix = 'iter_%d' % total_steps if opt.save_by_iter else 'latest'
                 model.save_networks(save_suffix)"""
-
+            
+            print(i, score(tensor2im(model.real_A), tensor2im(model.fake_B)))
             iter_data_time = time.time()
         
 

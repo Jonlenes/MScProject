@@ -30595,3 +30595,7 @@
 (epoch: 288, iters: 800, time: 0.065, data: 0.001) G_GAN: 27.631 G_L1: 5.532 D_real: 0.000 D_fake: 0.000 
 (epoch: 288, iters: 900, time: 0.087, data: 0.001) G_GAN: 27.631 G_L1: 8.822 D_real: 0.000 D_fake: 0.000 
 ================ Training Loss (Wed May 22 09:52:27 2019) ================
+(epoch: 288, iters: 10000, time: 0.000, data: 0.000) G_GAN: 27.631 G_L1: 6.828 D_real: 0.000 D_fake: 0.000 
+================ Training Loss (Wed May 22 10:10:38 2019) ================
+================ Training Loss (Wed May 22 10:13:19 2019) ================
+================ Training Loss (Wed May 22 10:14:04 2019) ================
