@@ -14,7 +14,7 @@
            display_server: http://localhost              
           display_winsize: 400                           
                     epoch: latest                        
-              epoch_count: 287                           	[default: 1]
+              epoch_count: 419                           	[default: 1]
                  fineSize: 256                           
                   gpu_ids: 0                             
                 init_gain: 0.02                          
@@ -35,7 +35,7 @@
                      netD: basic                         
                      netG: unet_256                      
                       ngf: 64                            
-                    niter: 10000                         	[default: 5000]
+                    niter: 418                           	[default: 5000]
               niter_decay: 100                           
                no_dropout: False                         
                   no_flip: False                         
@@ -68,3 +68,60 @@ loading the model from ./checkpoints/seismic_e5_pix2pix_v2/latest_net_D.pth
 [Network D] Total number of parameters : 2.765 M
 -----------------------------------------------
 create web directory ./checkpoints/seismic_e5_pix2pix_v2/web...
+(epoch: 419, iters: 10000, time: 0.000, data: 0.000) G_GAN: 27.631 G_L1: 5.368 D_real: 0.000 D_fake: 0.000 
+Training time so far: 10.11 min
+Len: 10000
+End of epoch 419 / 518 	 Time Taken: 620 sec 	 Acc: 90
+learning rate = 0.0001980
+(epoch: 420, iters: 10000, time: 0.000, data: 0.000) G_GAN: 27.631 G_L1: 3.763 D_real: 0.000 D_fake: 0.000 
+Training time so far: 20.22 min
+saving the model at the end of epoch 420, iters 20000
+Len: 10000
+End of epoch 420 / 518 	 Time Taken: 603 sec 	 Acc: 90
+learning rate = 0.0001960
+(epoch: 421, iters: 10000, time: 0.000, data: 0.000) G_GAN: 27.631 G_L1: 3.631 D_real: 0.000 D_fake: 0.000 
+Training time so far: 30.19 min
+Len: 10000
+End of epoch 421 / 518 	 Time Taken: 587 sec 	 Acc: 90
+learning rate = 0.0001941
+(epoch: 422, iters: 10000, time: 0.000, data: 0.000) G_GAN: 27.631 G_L1: 4.346 D_real: 0.000 D_fake: 0.000 
+Training time so far: 40.25 min
+Len: 10000
+End of epoch 422 / 518 	 Time Taken: 603 sec 	 Acc: 90
+learning rate = 0.0001921
+(epoch: 423, iters: 10000, time: 0.000, data: 0.000) G_GAN: 27.631 G_L1: 2.267 D_real: 0.000 D_fake: 0.000 
+Training time so far: 50.2 min
+Len: 10000
+End of epoch 423 / 518 	 Time Taken: 597 sec 	 Acc: 90
+learning rate = 0.0001901
+(epoch: 424, iters: 10000, time: 0.000, data: 0.000) G_GAN: 27.631 G_L1: 9.795 D_real: 0.000 D_fake: 0.000 
+Training time so far: 1.01 hr
+Len: 10000
+End of epoch 424 / 518 	 Time Taken: 606 sec 	 Acc: 90
+learning rate = 0.0001881
+(epoch: 425, iters: 10000, time: 0.000, data: 0.000) G_GAN: 27.631 G_L1: 2.521 D_real: 0.000 D_fake: 0.000 
+Training time so far: 1.17 hr
+saving the model at the end of epoch 425, iters 70000
+Len: 10000
+End of epoch 425 / 518 	 Time Taken: 618 sec 	 Acc: 90
+learning rate = 0.0001861
+(epoch: 426, iters: 10000, time: 0.000, data: 0.000) G_GAN: 27.631 G_L1: 3.928 D_real: 0.000 D_fake: 0.000 
+Training time so far: 1.35 hr
+Len: 10000
+End of epoch 426 / 518 	 Time Taken: 609 sec 	 Acc: 90
+learning rate = 0.0001842
+(epoch: 427, iters: 10000, time: 0.000, data: 0.000) G_GAN: 27.631 G_L1: 4.115 D_real: 0.000 D_fake: 0.000 
+Training time so far: 1.52 hr
+Len: 10000
+End of epoch 427 / 518 	 Time Taken: 605 sec 	 Acc: 90
+learning rate = 0.0001822
+(epoch: 428, iters: 10000, time: 0.000, data: 0.000) G_GAN: 27.631 G_L1: 2.925 D_real: 0.000 D_fake: 0.000 
+Training time so far: 1.68 hr
+Len: 10000
+End of epoch 428 / 518 	 Time Taken: 604 sec 	 Acc: 90
+learning rate = 0.0001802
+(epoch: 429, iters: 10000, time: 0.000, data: 0.000) G_GAN: 27.631 G_L1: 3.148 D_real: 0.000 D_fake: 0.000 
+Training time so far: 1.85 hr
+Len: 10000
+End of epoch 429 / 518 	 Time Taken: 609 sec 	 Acc: 90
+learning rate = 0.0001782

@@ -32,9 +32,11 @@ def split_data(synthetic_ricker2D, synthetic_psf):
     return psfs, rickers
 
 
-def process_sample(index_block, path):
-    data_ricker, data_psf, data_name = sg.get_sample()
-    xs, ys = split_data(data_ricker, data_psf)
+def process_sample(index_block, path, xs=None, ys=None, data_name=None):
+    if xs is None:
+        data_ricker, data_psf, data_name = sg.get_sample()
+        xs, ys = split_data(data_ricker, data_psf)
+    
     for i, (x, y) in enumerate(zip(xs, ys)):
         img = np.append(x, y, axis=1)
         name = path + "/" + str(index_block + i) + "_" + data_name.split(":")[0] + ".png"
