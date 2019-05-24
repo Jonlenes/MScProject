@@ -1,7 +1,7 @@
 import sample_generator as sg
 
 from io_util import save
-from config import output_folder, samples_by_data
+from config import output_folder, panel_side_base, output_panel_side
 
 from timer import Timer 
 
@@ -16,19 +16,24 @@ import multiprocessing as mp
 import numpy as np
 import shutil
 
+extra_random_samples = 2
+samples_by_data = int(output_panel_side / panel_side_base)*2 + extra_random_samples
+aligned = False
 
 def split_data(synthetic_ricker2D, synthetic_psf):
     psfs, rickers = [], []
-    for i in range(256, synthetic_psf.shape[0], 256):
-        for j in range(256, synthetic_psf.shape[1], 256):
-            psfs.append(synthetic_psf[i-256:i, j-256:j])
-            rickers.append(synthetic_ricker2D[i-256:i, j-256:j])
+    step = output_panel_side
+    for i in range(step, synthetic_psf.shape[0], step):
+        for j in range(step, synthetic_psf.shape[1], step):
+            psfs.append(synthetic_psf[i-step:i, j-step:j])
+            rickers.append(synthetic_ricker2D[i-step:i, j-step:j])
     
-    for i in range(8):
-        x = random.randint(1, 768)
-        y = random.randint(1, 768)
-        psfs.append(synthetic_psf[y:y+256, x:x+256])
-        rickers.append(synthetic_ricker2D[y:y+256, x:x+256])
+	## ADD PARAM HERE
+    for i in range(2):
+        x = random.randint(1, synthetic_psf.shape[0] - step)
+        y = random.randint(1, synthetic_psf.shape[0] - step)
+        psfs.append(synthetic_psf[y:y+step, x:x+step])
+        rickers.append(synthetic_ricker2D[y:y+step, x:x+step])
     return psfs, rickers
 
 
@@ -102,4 +107,4 @@ def create_dataset(n_samples, clear_folder=False):
 
 
 if __name__ == '__main__':
-    create_dataset(10000)
+    create_dataset(500)
