@@ -5,11 +5,11 @@ from config import output_folder, panel_side_base, output_panel_side
 
 from timer import Timer 
 
-from time import time
 from joblib import Parallel, delayed
 from tqdm import tqdm 
 from glob import glob
 
+import time
 import os
 import random
 import multiprocessing as mp
@@ -17,8 +17,9 @@ import numpy as np
 import shutil
 
 extra_random_samples = 2
-samples_by_data = int(output_panel_side / panel_side_base)*2 + extra_random_samples
+samples_by_data = int(panel_side_base / output_panel_side)*2 + extra_random_samples
 aligned = False
+
 
 def split_data(synthetic_ricker2D, synthetic_psf):
     psfs, rickers = [], []
@@ -42,10 +43,15 @@ def process_sample(index_block, path, xs=None, ys=None, data_name=None):
         data_ricker, data_psf, data_name = sg.get_sample()
         xs, ys = split_data(data_ricker, data_psf)
     
+    img_path = path + "/{0}{1}_" + data_name.split(":")[0] + ".png"
+    
     for i, (x, y) in enumerate(zip(xs, ys)):
-        img = np.append(x, y, axis=1)
-        name = path + "/" + str(index_block + i) + "_" + data_name.split(":")[0] + ".png"
-        save(img, name, color='gray', use_out_folder=False)
+        if aligned:
+            img = np.append(x, y, axis=1)
+            save(img, img_path.format("", str(index_block + i)), color='gray', use_out_folder=False)
+        else:
+            save(x, img_path.format("A/", str(index_block + i)), color='gray', use_out_folder=False)
+            save(y, img_path.format("B/", str(index_block + i)), color='gray', use_out_folder=False)
 
 
 def create_folder(path):
@@ -55,7 +61,7 @@ def create_folder(path):
     return False
 
 
-def create_dataset(n_samples, clear_folder=False):
+def create_dataset(n_samples):
     timer = Timer()
     timer.start()
     path = output_folder
@@ -65,46 +71,63 @@ def create_dataset(n_samples, clear_folder=False):
                 ("test", int(n_samples * 0.2)) ]
     
     total_datas = int(n_samples * 1.4) + 1
+    print("Total of data:", total_datas)
     
     nc = mp.cpu_count()
     print("Cpu count: ", nc)
 
-    if clear_folder and os.path.exists(path):
+    if os.path.exists(path):
         shutil.rmtree(path, ignore_errors=True)
+        time.sleep(2)
         os.mkdir(path)    
     
-    start = 0
-    if not create_folder(path):
-        files = glob(path + "/*.png")
-        if len(files) > 0: 
-            start = len(files)
-
+    create_folder(path)
+    if not aligned:
+        create_folder(path + "/A")
+        create_folder(path + "/B")
+     
     # Generate data parallel        
-    Parallel(n_jobs=nc)(delayed(process_sample) (i, path) for i in tqdm(range(start, total_datas, samples_by_data)))
+    Parallel(n_jobs=nc)(delayed(process_sample) (i, path) for i in tqdm(range(0, total_datas, samples_by_data)))
     
-    data_names = glob(path + "/*.png")
-    np.random.shuffle(data_names)
+    # Load data paths
+    if aligned: data_paths = glob(path + "/*.png")
+    else: data_paths = glob(path + "/A/*.png")
+        
+    # Shuffle the data 
+    np.random.shuffle(data_paths)
     start = 0
 
     for folder in folders:
-        # Path
-        path_temp = path + folder[0]
-        # Create folder
-        create_folder( path_temp )
+        # Paths
+        folder_path = path + folder[0]
+        if aligned:
+            create_folder( folder_path )
+        else:    
+            create_folder( folder_path + "_A")
+            create_folder( folder_path + "_B")
+            
         # File names 
-        sub_names = data_names[ start:start+folder[1] ]
+        data_paths_folder = data_paths[ start:start+folder[1] ]
+        
         # Move files
-        for name in sub_names:
-            # print(name, name.split("/")[-1], path_temp + "/" + name.split("/")[-1])
-            shutil.move(name, path_temp + "/" + name.replace("\\", "/").split("/")[-1])
+        for data_path in data_paths_folder:
+            if aligned:
+                shutil.move(data_path, folder_path + "/" + data_path.replace("\\", "/").split("/")[-1])
+            else:
+                # Dado A
+                shutil.move(data_path, folder_path + "_A/" + data_path.replace("\\", "/").split("/")[-1])
+                # Dado B
+                data_path = data_path.replace("A", "B")
+                shutil.move(data_path, folder_path + "_B/" + data_path.replace("\\", "/").split("/")[-1])
 
         # Update start
         start += folder[1] 
         
-        print("Total images of {0}: {1}".format(folder[0], len(glob(path_temp + "/*.png"))))
+        if not aligned: folder_path += "_A"
+        print("Total images of {0}: {1}".format(folder[0], len(glob(folder_path + "/*.png"))))
         
     print( timer.diff() )
 
 
 if __name__ == '__main__':
-    create_dataset(500)
+    create_dataset(50)
