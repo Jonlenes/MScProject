@@ -29,8 +29,7 @@ def split_data(synthetic_ricker2D, synthetic_psf):
             psfs.append(synthetic_psf[i-step:i, j-step:j])
             rickers.append(synthetic_ricker2D[i-step:i, j-step:j])
     
-	## ADD PARAM HERE
-    for i in range(2):
+    for i in range(extra_random_samples):
         x = random.randint(1, synthetic_psf.shape[0] - step)
         y = random.randint(1, synthetic_psf.shape[0] - step)
         psfs.append(synthetic_psf[y:y+step, x:x+step])
@@ -130,4 +129,4 @@ def create_dataset(n_samples):
 
 
 if __name__ == '__main__':
-    create_dataset(50)
+    create_dataset(10000)

@@ -1,14 +1,7 @@
 .DS_Store
 *.pth
 debug*
-datasets/bibtex/
-datasets/cityscapes/
-datasets/facades/
-datasets/night2day/
-checkpoints/cityscapes_pix2pix/
-checkpoints/facades_pix2pix/
-checkpoints/jonlenes_pix2pix/
-checkpoints/night2day_pix2pix/
+datasets/*
 build/
 dist/
 torch.egg-info/
