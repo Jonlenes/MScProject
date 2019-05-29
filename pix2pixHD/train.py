@@ -16,6 +16,7 @@ from data.data_loader import CreateDataLoader
 from models.models import create_model
 import util.util as util
 from util.visualizer import Visualizer
+from util.eval_metric import score
 
 opt = TrainOptions().parse()
 iter_path = os.path.join(opt.checkpoints_dir, opt.name, 'iter.txt')
@@ -56,10 +57,14 @@ print_delta = total_steps % opt.print_freq
 save_delta = total_steps % opt.save_latest_freq
 
 for epoch in range(start_epoch, opt.niter + opt.niter_decay + 1):
+    
     epoch_start_time = time.time()
+    acumulate_acc = 0
     if epoch != start_epoch:
         epoch_iter = epoch_iter % dataset_size
+    
     for i, data in enumerate(dataset, start=epoch_iter):
+        
         if total_steps % opt.print_freq == print_delta:
             iter_start_time = time.time()
         total_steps += opt.batchSize
@@ -70,7 +75,7 @@ for epoch in range(start_epoch, opt.niter + opt.niter_decay + 1):
 
         ############## Forward Pass ######################
         losses, generated = model(Variable(data['label']), Variable(data['inst']), 
-            Variable(data['image']), Variable(data['feat']), infer=save_fake)
+            Variable(data['image']), Variable(data['feat']), infer=True)
 
         # sum per device losses
         losses = [ torch.mean(x) if not isinstance(x, int) else x for x in losses ]
@@ -97,6 +102,10 @@ for epoch in range(start_epoch, opt.niter + opt.niter_decay + 1):
             loss_D.backward()        
         optimizer_D.step()        
 
+
+        # Compute acc for this batch
+        acumulate_acc += score(util.tensor2im(data['image'][0]), util.tensor2im(generated.data[0]))
+
         ############## Display results and errors ##########
         ### print out errors
         if total_steps % opt.print_freq == print_delta:
@@ -108,7 +117,7 @@ for epoch in range(start_epoch, opt.niter + opt.niter_decay + 1):
 
         ### display output images
         if save_fake:
-            diff_image = util.tensor2label(data['label'][0], opt.label_nc) - util.tensor2im(generated.data[0])
+            diff_image = util.tensor2im(data['image'][0]) - util.tensor2im(generated.data[0])
             visuals = OrderedDict([('PSF', util.tensor2label(data['label'][0], opt.label_nc)),
                                    ('Genereted', util.tensor2im(generated.data[0])),
                                    ('Ricker', util.tensor2im(data['image'][0])),
@@ -126,8 +135,8 @@ for epoch in range(start_epoch, opt.niter + opt.niter_decay + 1):
        
     # end of epoch 
     iter_end_time = time.time()
-    print('End of epoch %d / %d \t Time Taken: %d sec' %
-          (epoch, opt.niter + opt.niter_decay, time.time() - epoch_start_time))
+    print('End of epoch %d / %d \t Time Taken: %d sec \t Acc: %d' %
+          (epoch, opt.niter + opt.niter_decay, time.time() - epoch_start_time, int(acumulate_acc/dataset_size) ))
 
     ### save model for this epoch
     if epoch % opt.save_epoch_freq == 0:
