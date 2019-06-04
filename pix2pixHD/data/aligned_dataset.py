@@ -4,6 +4,7 @@ import os.path
 from data.base_dataset import BaseDataset, get_params, get_transform, normalize
 from data.image_folder import make_dataset
 from PIL import Image
+from util import util
 
 class AlignedDataset(BaseDataset):
     def initialize(self, opt):
@@ -67,13 +68,13 @@ class AlignedDataset(BaseDataset):
                 feat_tensor = norm(transform_A(feat))                            
 
         if self.opt.input_nc == 1:  # RGB to gray
-            tmp = A_tensor[0, ...] * 0.299 + A_tensor[1, ...] * 0.587 + A_tensor[2, ...] * 0.114
-            A_tensor = tmp.unsqueeze(0)
-
-        if self.opt.output_nc == 1:  # RGB to gray
-            tmp = B_tensor[0, ...] * 0.299 + B_tensor[1, ...] * 0.587 + B_tensor[2, ...] * 0.114
-            B_tensor = tmp.unsqueeze(0)
+            A_tensor = util.to_gray(A_tensor)
             
+        if self.opt.output_nc == 1:  # RGB to gray
+            B_tensor = util.to_gray(B_tensor)
+            
+        
+        # print("IN and OUT shapes:", A_tensor.shape, B_tensor.shape )
         input_dict = {'label': A_tensor, 'inst': inst_tensor, 'image': B_tensor, 
                       'feat': feat_tensor, 'path': A_path}
 

@@ -1,0 +1,809 @@
+------------ Options -------------
+batchSize: 6
+beta1: 0.5
+checkpoints_dir: ./checkpoints
+continue_train: True
+data_type: 32
+dataroot: ./datasets/seismic_e1
+debug: False
+display_freq: 100
+display_winsize: 512
+feat_num: 3
+fineSize: 512
+fp16: False
+gpu_ids: [0]
+input_nc: 1
+instance_feat: False
+isTrain: True
+label_feat: False
+label_nc: 0
+lambda_feat: 10.0
+loadSize: 512
+load_features: False
+load_pretrain: 
+local_rank: 0
+lr: 0.0002
+max_dataset_size: inf
+model: pix2pixHD
+nThreads: 8
+n_blocks_global: 9
+n_blocks_local: 3
+n_clusters: 10
+n_downsample_E: 4
+n_downsample_global: 4
+n_layers_D: 3
+n_local_enhancers: 1
+name: seismic_e2
+ndf: 64
+nef: 16
+netG: global
+ngf: 64
+niter: 100
+niter_decay: 100
+niter_fix_global: 0
+no_flip: False
+no_ganFeat_loss: False
+no_html: False
+no_instance: True
+no_lsgan: False
+no_vgg_loss: False
+norm: instance
+num_D: 2
+output_nc: 1
+phase: train
+pool_size: 0
+print_freq: 100
+resize_or_crop: scale_width
+save_epoch_freq: 1
+save_latest_freq: 1000
+serial_batches: False
+tf_log: False
+use_dropout: False
+verbose: False
+which_epoch: latest
+-------------- End ----------------
+Resuming from epoch 8 at iteration 0
+CustomDatasetDataLoader
+dataset [AlignedDataset] was created
+#training images = 9996
+Sequential(
+  (0): ReflectionPad2d((3, 3, 3, 3))
+  (1): Conv2d(1, 64, kernel_size=(7, 7), stride=(1, 1))
+  (2): InstanceNorm2d(64, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+  (3): ReLU(inplace)
+  (4): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  (5): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+  (6): ReLU(inplace)
+  (7): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  (8): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+  (9): ReLU(inplace)
+  (10): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  (11): InstanceNorm2d(512, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+  (12): ReLU(inplace)
+  (13): Conv2d(512, 1024, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  (14): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+  (15): ReLU(inplace)
+  (16): ResnetBlock(
+    (conv_block): Sequential(
+      (0): ReflectionPad2d((1, 1, 1, 1))
+      (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      (3): ReLU(inplace)
+      (4): ReflectionPad2d((1, 1, 1, 1))
+      (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    )
+  )
+  (17): ResnetBlock(
+    (conv_block): Sequential(
+      (0): ReflectionPad2d((1, 1, 1, 1))
+      (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      (3): ReLU(inplace)
+      (4): ReflectionPad2d((1, 1, 1, 1))
+      (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    )
+  )
+  (18): ResnetBlock(
+    (conv_block): Sequential(
+      (0): ReflectionPad2d((1, 1, 1, 1))
+      (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      (3): ReLU(inplace)
+      (4): ReflectionPad2d((1, 1, 1, 1))
+      (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    )
+  )
+  (19): ResnetBlock(
+    (conv_block): Sequential(
+      (0): ReflectionPad2d((1, 1, 1, 1))
+      (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      (3): ReLU(inplace)
+      (4): ReflectionPad2d((1, 1, 1, 1))
+      (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    )
+  )
+  (20): ResnetBlock(
+    (conv_block): Sequential(
+      (0): ReflectionPad2d((1, 1, 1, 1))
+      (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      (3): ReLU(inplace)
+      (4): ReflectionPad2d((1, 1, 1, 1))
+      (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    )
+  )
+  (21): ResnetBlock(
+    (conv_block): Sequential(
+      (0): ReflectionPad2d((1, 1, 1, 1))
+      (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      (3): ReLU(inplace)
+      (4): ReflectionPad2d((1, 1, 1, 1))
+      (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    )
+  )
+  (22): ResnetBlock(
+    (conv_block): Sequential(
+      (0): ReflectionPad2d((1, 1, 1, 1))
+      (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      (3): ReLU(inplace)
+      (4): ReflectionPad2d((1, 1, 1, 1))
+      (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    )
+  )
+  (23): ResnetBlock(
+    (conv_block): Sequential(
+      (0): ReflectionPad2d((1, 1, 1, 1))
+      (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      (3): ReLU(inplace)
+      (4): ReflectionPad2d((1, 1, 1, 1))
+      (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    )
+  )
+  (24): ResnetBlock(
+    (conv_block): Sequential(
+      (0): ReflectionPad2d((1, 1, 1, 1))
+      (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      (3): ReLU(inplace)
+      (4): ReflectionPad2d((1, 1, 1, 1))
+      (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+      (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    )
+  )
+  (25): ConvTranspose2d(1024, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+  (26): InstanceNorm2d(512, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+  (27): ReLU(inplace)
+  (28): ConvTranspose2d(512, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+  (29): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+  (30): ReLU(inplace)
+  (31): ConvTranspose2d(256, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+  (32): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+  (33): ReLU(inplace)
+  (34): ConvTranspose2d(128, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+  (35): InstanceNorm2d(64, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+  (36): ReLU(inplace)
+  (37): ReflectionPad2d((3, 3, 3, 3))
+  (38): Conv2d(64, 1, kernel_size=(7, 7), stride=(1, 1))
+  (39): Tanh()
+)
+GlobalGenerator(
+  (model): Sequential(
+    (0): ReflectionPad2d((3, 3, 3, 3))
+    (1): Conv2d(1, 64, kernel_size=(7, 7), stride=(1, 1))
+    (2): InstanceNorm2d(64, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (3): ReLU(inplace)
+    (4): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (5): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (6): ReLU(inplace)
+    (7): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (8): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (9): ReLU(inplace)
+    (10): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (11): InstanceNorm2d(512, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (12): ReLU(inplace)
+    (13): Conv2d(512, 1024, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (14): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (15): ReLU(inplace)
+    (16): ResnetBlock(
+      (conv_block): Sequential(
+        (0): ReflectionPad2d((1, 1, 1, 1))
+        (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+        (3): ReLU(inplace)
+        (4): ReflectionPad2d((1, 1, 1, 1))
+        (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      )
+    )
+    (17): ResnetBlock(
+      (conv_block): Sequential(
+        (0): ReflectionPad2d((1, 1, 1, 1))
+        (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+        (3): ReLU(inplace)
+        (4): ReflectionPad2d((1, 1, 1, 1))
+        (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      )
+    )
+    (18): ResnetBlock(
+      (conv_block): Sequential(
+        (0): ReflectionPad2d((1, 1, 1, 1))
+        (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+        (3): ReLU(inplace)
+        (4): ReflectionPad2d((1, 1, 1, 1))
+        (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      )
+    )
+    (19): ResnetBlock(
+      (conv_block): Sequential(
+        (0): ReflectionPad2d((1, 1, 1, 1))
+        (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+        (3): ReLU(inplace)
+        (4): ReflectionPad2d((1, 1, 1, 1))
+        (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      )
+    )
+    (20): ResnetBlock(
+      (conv_block): Sequential(
+        (0): ReflectionPad2d((1, 1, 1, 1))
+        (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+        (3): ReLU(inplace)
+        (4): ReflectionPad2d((1, 1, 1, 1))
+        (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      )
+    )
+    (21): ResnetBlock(
+      (conv_block): Sequential(
+        (0): ReflectionPad2d((1, 1, 1, 1))
+        (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+        (3): ReLU(inplace)
+        (4): ReflectionPad2d((1, 1, 1, 1))
+        (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      )
+    )
+    (22): ResnetBlock(
+      (conv_block): Sequential(
+        (0): ReflectionPad2d((1, 1, 1, 1))
+        (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+        (3): ReLU(inplace)
+        (4): ReflectionPad2d((1, 1, 1, 1))
+        (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      )
+    )
+    (23): ResnetBlock(
+      (conv_block): Sequential(
+        (0): ReflectionPad2d((1, 1, 1, 1))
+        (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+        (3): ReLU(inplace)
+        (4): ReflectionPad2d((1, 1, 1, 1))
+        (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      )
+    )
+    (24): ResnetBlock(
+      (conv_block): Sequential(
+        (0): ReflectionPad2d((1, 1, 1, 1))
+        (1): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (2): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+        (3): ReLU(inplace)
+        (4): ReflectionPad2d((1, 1, 1, 1))
+        (5): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1))
+        (6): InstanceNorm2d(1024, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+      )
+    )
+    (25): ConvTranspose2d(1024, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+    (26): InstanceNorm2d(512, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (27): ReLU(inplace)
+    (28): ConvTranspose2d(512, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+    (29): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (30): ReLU(inplace)
+    (31): ConvTranspose2d(256, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+    (32): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (33): ReLU(inplace)
+    (34): ConvTranspose2d(128, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+    (35): InstanceNorm2d(64, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (36): ReLU(inplace)
+    (37): ReflectionPad2d((3, 3, 3, 3))
+    (38): Conv2d(64, 1, kernel_size=(7, 7), stride=(1, 1))
+    (39): Tanh()
+  )
+)
+MultiscaleDiscriminator(
+  (scale0_layer0): Sequential(
+    (0): Conv2d(2, 64, kernel_size=(4, 4), stride=(2, 2), padding=(2, 2))
+    (1): LeakyReLU(negative_slope=0.2, inplace)
+  )
+  (scale0_layer1): Sequential(
+    (0): Conv2d(64, 128, kernel_size=(4, 4), stride=(2, 2), padding=(2, 2))
+    (1): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (2): LeakyReLU(negative_slope=0.2, inplace)
+  )
+  (scale0_layer2): Sequential(
+    (0): Conv2d(128, 256, kernel_size=(4, 4), stride=(2, 2), padding=(2, 2))
+    (1): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (2): LeakyReLU(negative_slope=0.2, inplace)
+  )
+  (scale0_layer3): Sequential(
+    (0): Conv2d(256, 512, kernel_size=(4, 4), stride=(1, 1), padding=(2, 2))
+    (1): InstanceNorm2d(512, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (2): LeakyReLU(negative_slope=0.2, inplace)
+  )
+  (scale0_layer4): Sequential(
+    (0): Conv2d(512, 1, kernel_size=(4, 4), stride=(1, 1), padding=(2, 2))
+  )
+  (scale1_layer0): Sequential(
+    (0): Conv2d(2, 64, kernel_size=(4, 4), stride=(2, 2), padding=(2, 2))
+    (1): LeakyReLU(negative_slope=0.2, inplace)
+  )
+  (scale1_layer1): Sequential(
+    (0): Conv2d(64, 128, kernel_size=(4, 4), stride=(2, 2), padding=(2, 2))
+    (1): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (2): LeakyReLU(negative_slope=0.2, inplace)
+  )
+  (scale1_layer2): Sequential(
+    (0): Conv2d(128, 256, kernel_size=(4, 4), stride=(2, 2), padding=(2, 2))
+    (1): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (2): LeakyReLU(negative_slope=0.2, inplace)
+  )
+  (scale1_layer3): Sequential(
+    (0): Conv2d(256, 512, kernel_size=(4, 4), stride=(1, 1), padding=(2, 2))
+    (1): InstanceNorm2d(512, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (2): LeakyReLU(negative_slope=0.2, inplace)
+  )
+  (scale1_layer4): Sequential(
+    (0): Conv2d(512, 1, kernel_size=(4, 4), stride=(1, 1), padding=(2, 2))
+  )
+  (downsample): AvgPool2d(kernel_size=3, stride=2, padding=[1, 1])
+)
+create web directory ./checkpoints/seismic_e2/web...
+(epoch: 8, iters: 300, time: 0.173) G_GAN: 1.034 G_GAN_Feat: 2.996 G_VGG: 1.780 D_real: 0.490 D_fake: 0.228 
+(epoch: 8, iters: 600, time: 0.161) G_GAN: 1.284 G_GAN_Feat: 2.488 G_VGG: 1.615 D_real: 0.672 D_fake: 0.118 
+(epoch: 8, iters: 900, time: 0.162) G_GAN: 0.730 G_GAN_Feat: 2.658 G_VGG: 1.433 D_real: 0.655 D_fake: 0.449 
+(epoch: 8, iters: 1200, time: 0.162) G_GAN: 1.151 G_GAN_Feat: 3.169 G_VGG: 1.460 D_real: 0.470 D_fake: 0.188 
+(epoch: 8, iters: 1500, time: 0.162) G_GAN: 1.212 G_GAN_Feat: 2.768 G_VGG: 2.122 D_real: 0.394 D_fake: 0.155 
+(epoch: 8, iters: 1800, time: 0.163) G_GAN: 1.120 G_GAN_Feat: 2.514 G_VGG: 1.317 D_real: 0.557 D_fake: 0.177 
+(epoch: 8, iters: 2100, time: 0.163) G_GAN: 0.980 G_GAN_Feat: 2.759 G_VGG: 1.442 D_real: 0.472 D_fake: 0.252 
+(epoch: 8, iters: 2400, time: 0.163) G_GAN: 0.864 G_GAN_Feat: 2.460 G_VGG: 1.422 D_real: 0.131 D_fake: 0.311 
+(epoch: 8, iters: 2700, time: 0.163) G_GAN: 0.781 G_GAN_Feat: 2.634 G_VGG: 1.966 D_real: 0.248 D_fake: 0.374 
+(epoch: 8, iters: 3000, time: 0.163) G_GAN: 0.981 G_GAN_Feat: 2.762 G_VGG: 1.613 D_real: 0.349 D_fake: 0.265 
+(epoch: 8, iters: 3300, time: 0.163) G_GAN: 0.918 G_GAN_Feat: 3.121 G_VGG: 1.729 D_real: 0.366 D_fake: 0.291 
+(epoch: 8, iters: 3600, time: 0.164) G_GAN: 0.820 G_GAN_Feat: 2.579 G_VGG: 1.264 D_real: 0.221 D_fake: 0.335 
+(epoch: 8, iters: 3900, time: 0.164) G_GAN: 1.852 G_GAN_Feat: 2.874 G_VGG: 1.557 D_real: 0.168 D_fake: 0.054 
+(epoch: 8, iters: 4200, time: 0.164) G_GAN: 0.972 G_GAN_Feat: 3.433 G_VGG: 1.837 D_real: 0.181 D_fake: 0.268 
+(epoch: 8, iters: 4500, time: 0.164) G_GAN: 1.002 G_GAN_Feat: 3.133 G_VGG: 1.294 D_real: 0.513 D_fake: 0.256 
+(epoch: 8, iters: 4800, time: 0.164) G_GAN: 0.798 G_GAN_Feat: 2.254 G_VGG: 1.507 D_real: 0.329 D_fake: 0.430 
+(epoch: 8, iters: 5100, time: 0.164) G_GAN: 0.976 G_GAN_Feat: 2.654 G_VGG: 1.267 D_real: 0.257 D_fake: 0.323 
+(epoch: 8, iters: 5400, time: 0.164) G_GAN: 0.761 G_GAN_Feat: 2.979 G_VGG: 1.303 D_real: 0.137 D_fake: 0.427 
+(epoch: 8, iters: 5700, time: 0.164) G_GAN: 1.217 G_GAN_Feat: 2.360 G_VGG: 1.554 D_real: 0.434 D_fake: 0.156 
+(epoch: 8, iters: 6000, time: 0.164) G_GAN: 1.105 G_GAN_Feat: 2.694 G_VGG: 2.194 D_real: 0.607 D_fake: 0.197 
+(epoch: 8, iters: 6300, time: 0.164) G_GAN: 0.815 G_GAN_Feat: 2.484 G_VGG: 1.223 D_real: 0.179 D_fake: 0.350 
+(epoch: 8, iters: 6600, time: 0.164) G_GAN: 1.587 G_GAN_Feat: 2.252 G_VGG: 1.442 D_real: 0.344 D_fake: 0.122 
+(epoch: 8, iters: 6900, time: 0.164) G_GAN: 0.965 G_GAN_Feat: 2.333 G_VGG: 1.462 D_real: 0.233 D_fake: 0.250 
+(epoch: 8, iters: 7200, time: 0.164) G_GAN: 0.752 G_GAN_Feat: 2.819 G_VGG: 1.674 D_real: 0.437 D_fake: 0.368 
+(epoch: 8, iters: 7500, time: 0.164) G_GAN: 0.784 G_GAN_Feat: 2.335 G_VGG: 1.360 D_real: 0.403 D_fake: 0.356 
+(epoch: 8, iters: 7800, time: 0.164) G_GAN: 0.698 G_GAN_Feat: 3.130 G_VGG: 1.659 D_real: 0.215 D_fake: 0.383 
+(epoch: 8, iters: 8100, time: 0.164) G_GAN: 1.962 G_GAN_Feat: 3.191 G_VGG: 1.644 D_real: 1.216 D_fake: 1.755 
+(epoch: 8, iters: 8400, time: 0.164) G_GAN: 0.568 G_GAN_Feat: 1.733 G_VGG: 1.253 D_real: 0.370 D_fake: 0.501 
+(epoch: 8, iters: 8700, time: 0.164) G_GAN: 0.675 G_GAN_Feat: 2.233 G_VGG: 1.548 D_real: 0.578 D_fake: 0.376 
+(epoch: 8, iters: 9000, time: 0.164) G_GAN: 0.811 G_GAN_Feat: 3.036 G_VGG: 1.878 D_real: 0.216 D_fake: 0.311 
+(epoch: 8, iters: 9300, time: 0.164) G_GAN: 0.995 G_GAN_Feat: 2.771 G_VGG: 1.546 D_real: 0.446 D_fake: 0.231 
+(epoch: 8, iters: 9600, time: 0.164) G_GAN: 0.899 G_GAN_Feat: 2.334 G_VGG: 1.422 D_real: 0.439 D_fake: 0.330 
+(epoch: 8, iters: 9900, time: 0.164) G_GAN: 0.636 G_GAN_Feat: 2.137 G_VGG: 1.682 D_real: 0.257 D_fake: 0.426 
+Acc: 92.62410923838615
+End of epoch 8 / 200 	 Time Taken: 1637 sec
+saving the model at the end of epoch 8, iters 79968
+(epoch: 9, iters: 204, time: 0.203) G_GAN: 1.896 G_GAN_Feat: 2.871 G_VGG: 1.674 D_real: 0.068 D_fake: 0.038 
+(epoch: 9, iters: 504, time: 0.164) G_GAN: 2.905 G_GAN_Feat: 2.133 G_VGG: 1.205 D_real: 0.401 D_fake: 0.165 
+(epoch: 9, iters: 804, time: 0.164) G_GAN: 1.145 G_GAN_Feat: 2.640 G_VGG: 1.487 D_real: 0.410 D_fake: 0.313 
+(epoch: 9, iters: 1104, time: 0.164) G_GAN: 0.758 G_GAN_Feat: 2.999 G_VGG: 1.727 D_real: 0.271 D_fake: 0.392 
+(epoch: 9, iters: 1404, time: 0.164) G_GAN: 1.319 G_GAN_Feat: 2.468 G_VGG: 1.333 D_real: 0.490 D_fake: 0.128 
+(epoch: 9, iters: 1704, time: 0.164) G_GAN: 1.044 G_GAN_Feat: 2.312 G_VGG: 1.344 D_real: 0.273 D_fake: 0.252 
+(epoch: 9, iters: 2004, time: 0.164) G_GAN: 1.073 G_GAN_Feat: 2.599 G_VGG: 1.504 D_real: 0.199 D_fake: 0.185 
+(epoch: 9, iters: 2304, time: 0.164) G_GAN: 0.882 G_GAN_Feat: 3.821 G_VGG: 1.757 D_real: 0.180 D_fake: 0.310 
+(epoch: 9, iters: 2604, time: 0.164) G_GAN: 1.149 G_GAN_Feat: 2.182 G_VGG: 1.245 D_real: 0.511 D_fake: 0.198 
+(epoch: 9, iters: 2904, time: 0.164) G_GAN: 0.872 G_GAN_Feat: 2.612 G_VGG: 1.661 D_real: 0.565 D_fake: 0.300 
+(epoch: 9, iters: 3204, time: 0.164) G_GAN: 0.999 G_GAN_Feat: 2.306 G_VGG: 1.439 D_real: 0.541 D_fake: 0.239 
+(epoch: 9, iters: 3504, time: 0.164) G_GAN: 0.798 G_GAN_Feat: 2.889 G_VGG: 1.648 D_real: 0.141 D_fake: 0.357 
+(epoch: 9, iters: 3804, time: 0.164) G_GAN: 1.213 G_GAN_Feat: 2.884 G_VGG: 2.009 D_real: 0.476 D_fake: 0.197 
+(epoch: 9, iters: 4104, time: 0.164) G_GAN: 1.836 G_GAN_Feat: 2.962 G_VGG: 1.468 D_real: 0.450 D_fake: 0.052 
+(epoch: 9, iters: 4404, time: 0.164) G_GAN: 1.248 G_GAN_Feat: 2.952 G_VGG: 1.459 D_real: 0.271 D_fake: 0.169 
+(epoch: 9, iters: 4704, time: 0.164) G_GAN: 0.902 G_GAN_Feat: 3.105 G_VGG: 1.567 D_real: 0.348 D_fake: 0.272 
+(epoch: 9, iters: 5004, time: 0.164) G_GAN: 1.301 G_GAN_Feat: 2.744 G_VGG: 1.373 D_real: 0.540 D_fake: 0.127 
+(epoch: 9, iters: 5304, time: 0.164) G_GAN: 0.935 G_GAN_Feat: 3.193 G_VGG: 1.367 D_real: 0.241 D_fake: 0.292 
+(epoch: 9, iters: 5604, time: 0.164) G_GAN: 1.167 G_GAN_Feat: 3.076 G_VGG: 1.774 D_real: 0.603 D_fake: 0.170 
+(epoch: 9, iters: 5904, time: 0.164) G_GAN: 0.701 G_GAN_Feat: 2.121 G_VGG: 1.498 D_real: 0.420 D_fake: 0.602 
+(epoch: 9, iters: 6204, time: 0.164) G_GAN: 1.063 G_GAN_Feat: 2.874 G_VGG: 1.131 D_real: 0.526 D_fake: 0.231 
+(epoch: 9, iters: 6504, time: 0.164) G_GAN: 0.865 G_GAN_Feat: 2.494 G_VGG: 1.519 D_real: 0.163 D_fake: 0.297 
+(epoch: 9, iters: 6804, time: 0.164) G_GAN: 1.049 G_GAN_Feat: 3.312 G_VGG: 1.289 D_real: 0.158 D_fake: 0.221 
+(epoch: 9, iters: 7104, time: 0.164) G_GAN: 0.821 G_GAN_Feat: 3.114 G_VGG: 1.284 D_real: 0.067 D_fake: 0.324 
+(epoch: 9, iters: 7404, time: 0.164) G_GAN: 1.513 G_GAN_Feat: 2.767 G_VGG: 1.211 D_real: 0.442 D_fake: 0.104 
+(epoch: 9, iters: 7704, time: 0.164) G_GAN: 1.434 G_GAN_Feat: 3.009 G_VGG: 1.495 D_real: 0.458 D_fake: 0.157 
+(epoch: 9, iters: 8004, time: 0.164) G_GAN: 1.231 G_GAN_Feat: 2.717 G_VGG: 1.569 D_real: 0.303 D_fake: 0.182 
+(epoch: 9, iters: 8304, time: 0.164) G_GAN: 1.347 G_GAN_Feat: 2.718 G_VGG: 1.285 D_real: 0.496 D_fake: 0.096 
+(epoch: 9, iters: 8604, time: 0.164) G_GAN: 1.348 G_GAN_Feat: 2.743 G_VGG: 1.388 D_real: 0.380 D_fake: 0.112 
+(epoch: 9, iters: 8904, time: 0.164) G_GAN: 0.901 G_GAN_Feat: 2.669 G_VGG: 1.619 D_real: 0.273 D_fake: 0.266 
+(epoch: 9, iters: 9204, time: 0.164) G_GAN: 1.010 G_GAN_Feat: 2.530 G_VGG: 1.378 D_real: 0.437 D_fake: 0.244 
+(epoch: 9, iters: 9504, time: 0.164) G_GAN: 1.306 G_GAN_Feat: 3.068 G_VGG: 1.753 D_real: 0.317 D_fake: 0.134 
+(epoch: 9, iters: 9804, time: 0.164) G_GAN: 0.848 G_GAN_Feat: 3.289 G_VGG: 1.590 D_real: 0.499 D_fake: 0.309 
+Acc: 93.9424816519022
+End of epoch 9 / 200 	 Time Taken: 1640 sec
+saving the model at the end of epoch 9, iters 89964
+(epoch: 10, iters: 108, time: 0.189) G_GAN: 1.231 G_GAN_Feat: 2.952 G_VGG: 1.204 D_real: 0.111 D_fake: 0.203 
+(epoch: 10, iters: 408, time: 0.164) G_GAN: 0.899 G_GAN_Feat: 2.759 G_VGG: 1.514 D_real: 0.283 D_fake: 0.292 
+(epoch: 10, iters: 708, time: 0.164) G_GAN: 0.948 G_GAN_Feat: 3.089 G_VGG: 1.463 D_real: 0.433 D_fake: 0.226 
+(epoch: 10, iters: 1008, time: 0.164) G_GAN: 1.366 G_GAN_Feat: 2.423 G_VGG: 1.264 D_real: 0.101 D_fake: 0.119 
+(epoch: 10, iters: 1308, time: 0.164) G_GAN: 1.544 G_GAN_Feat: 2.897 G_VGG: 1.206 D_real: 0.446 D_fake: 0.123 
+(epoch: 10, iters: 1608, time: 0.164) G_GAN: 1.659 G_GAN_Feat: 3.343 G_VGG: 1.492 D_real: 0.312 D_fake: 0.116 
+(epoch: 10, iters: 1908, time: 0.164) G_GAN: 2.279 G_GAN_Feat: 2.990 G_VGG: 1.352 D_real: 0.733 D_fake: 0.174 
+(epoch: 10, iters: 2208, time: 0.164) G_GAN: 1.345 G_GAN_Feat: 2.871 G_VGG: 1.514 D_real: 0.190 D_fake: 0.120 
+(epoch: 10, iters: 2508, time: 0.164) G_GAN: 1.181 G_GAN_Feat: 2.923 G_VGG: 1.472 D_real: 0.265 D_fake: 0.179 
+(epoch: 10, iters: 2808, time: 0.164) G_GAN: 1.035 G_GAN_Feat: 2.756 G_VGG: 1.371 D_real: 0.190 D_fake: 0.238 
+(epoch: 10, iters: 3108, time: 0.164) G_GAN: 0.941 G_GAN_Feat: 2.659 G_VGG: 1.276 D_real: 0.276 D_fake: 0.252 
+(epoch: 10, iters: 3408, time: 0.164) G_GAN: 1.270 G_GAN_Feat: 2.689 G_VGG: 1.717 D_real: 0.239 D_fake: 0.141 
+(epoch: 10, iters: 3708, time: 0.164) G_GAN: 1.124 G_GAN_Feat: 2.615 G_VGG: 1.629 D_real: 0.303 D_fake: 0.195 
+(epoch: 10, iters: 4008, time: 0.164) G_GAN: 1.190 G_GAN_Feat: 2.503 G_VGG: 1.708 D_real: 0.246 D_fake: 0.150 
+(epoch: 10, iters: 4308, time: 0.164) G_GAN: 0.837 G_GAN_Feat: 2.678 G_VGG: 1.403 D_real: 0.153 D_fake: 0.305 
+(epoch: 10, iters: 4608, time: 0.164) G_GAN: 0.807 G_GAN_Feat: 3.430 G_VGG: 1.343 D_real: 0.477 D_fake: 0.387 
+(epoch: 10, iters: 4908, time: 0.164) G_GAN: 1.350 G_GAN_Feat: 3.059 G_VGG: 1.635 D_real: 0.449 D_fake: 0.126 
+(epoch: 10, iters: 5208, time: 0.164) G_GAN: 1.133 G_GAN_Feat: 2.954 G_VGG: 1.642 D_real: 0.212 D_fake: 0.186 
+(epoch: 10, iters: 5508, time: 0.164) G_GAN: 1.201 G_GAN_Feat: 2.766 G_VGG: 1.409 D_real: 0.424 D_fake: 0.167 
+(epoch: 10, iters: 5808, time: 0.164) G_GAN: 0.476 G_GAN_Feat: 2.091 G_VGG: 1.239 D_real: 0.412 D_fake: 0.548 
+(epoch: 10, iters: 6108, time: 0.164) G_GAN: 0.567 G_GAN_Feat: 1.987 G_VGG: 1.360 D_real: 0.441 D_fake: 0.509 
+(epoch: 10, iters: 6408, time: 0.164) G_GAN: 0.828 G_GAN_Feat: 2.859 G_VGG: 1.824 D_real: 0.567 D_fake: 0.303 
+(epoch: 10, iters: 6708, time: 0.164) G_GAN: 0.465 G_GAN_Feat: 2.516 G_VGG: 1.417 D_real: 0.295 D_fake: 0.734 
+(epoch: 10, iters: 7008, time: 0.164) G_GAN: 1.142 G_GAN_Feat: 2.324 G_VGG: 1.513 D_real: 0.495 D_fake: 0.179 
+(epoch: 10, iters: 7308, time: 0.164) G_GAN: 0.941 G_GAN_Feat: 3.226 G_VGG: 1.781 D_real: 0.133 D_fake: 0.279 
+(epoch: 10, iters: 7608, time: 0.164) G_GAN: 1.185 G_GAN_Feat: 2.911 G_VGG: 1.401 D_real: 0.071 D_fake: 0.181 
+(epoch: 10, iters: 7908, time: 0.164) G_GAN: 0.714 G_GAN_Feat: 2.441 G_VGG: 1.338 D_real: 0.313 D_fake: 0.375 
+(epoch: 10, iters: 8208, time: 0.164) G_GAN: 0.682 G_GAN_Feat: 2.426 G_VGG: 1.459 D_real: 0.195 D_fake: 0.436 
+(epoch: 10, iters: 8508, time: 0.164) G_GAN: 1.166 G_GAN_Feat: 2.726 G_VGG: 1.661 D_real: 0.260 D_fake: 0.253 
+(epoch: 10, iters: 8808, time: 0.164) G_GAN: 1.433 G_GAN_Feat: 2.573 G_VGG: 1.433 D_real: 0.227 D_fake: 0.116 
+(epoch: 10, iters: 9108, time: 0.164) G_GAN: 1.543 G_GAN_Feat: 3.222 G_VGG: 1.491 D_real: 0.072 D_fake: 0.089 
+(epoch: 10, iters: 9408, time: 0.164) G_GAN: 1.036 G_GAN_Feat: 3.105 G_VGG: 1.611 D_real: 0.189 D_fake: 0.221 
+(epoch: 10, iters: 9708, time: 0.164) G_GAN: 1.536 G_GAN_Feat: 2.726 G_VGG: 1.532 D_real: 0.173 D_fake: 0.105 
+Acc: 91.56038612127304
+End of epoch 10 / 200 	 Time Taken: 1641 sec
+saving the model at the end of epoch 10, iters 99960
+(epoch: 11, iters: 12, time: 0.189) G_GAN: 1.281 G_GAN_Feat: 2.565 G_VGG: 1.241 D_real: 0.480 D_fake: 0.138 
+(epoch: 11, iters: 312, time: 0.164) G_GAN: 1.079 G_GAN_Feat: 3.740 G_VGG: 1.577 D_real: 0.389 D_fake: 0.199 
+(epoch: 11, iters: 612, time: 0.164) G_GAN: 0.857 G_GAN_Feat: 2.870 G_VGG: 1.541 D_real: 0.138 D_fake: 0.297 
+(epoch: 11, iters: 912, time: 0.164) G_GAN: 1.622 G_GAN_Feat: 2.637 G_VGG: 1.455 D_real: 0.369 D_fake: 0.063 
+(epoch: 11, iters: 1212, time: 0.164) G_GAN: 1.574 G_GAN_Feat: 3.069 G_VGG: 1.656 D_real: 0.203 D_fake: 0.104 
+(epoch: 11, iters: 1512, time: 0.164) G_GAN: 1.500 G_GAN_Feat: 2.812 G_VGG: 1.536 D_real: 0.132 D_fake: 0.086 
+(epoch: 11, iters: 1812, time: 0.164) G_GAN: 1.748 G_GAN_Feat: 2.414 G_VGG: 1.230 D_real: 0.863 D_fake: 0.821 
+(epoch: 11, iters: 2112, time: 0.164) G_GAN: 0.825 G_GAN_Feat: 2.465 G_VGG: 1.492 D_real: 0.341 D_fake: 0.327 
+(epoch: 11, iters: 2412, time: 0.164) G_GAN: 1.157 G_GAN_Feat: 2.594 G_VGG: 1.374 D_real: 0.216 D_fake: 0.213 
+(epoch: 11, iters: 2712, time: 0.164) G_GAN: 1.190 G_GAN_Feat: 2.774 G_VGG: 1.453 D_real: 0.606 D_fake: 0.186 
+(epoch: 11, iters: 3012, time: 0.164) G_GAN: 1.030 G_GAN_Feat: 2.721 G_VGG: 1.400 D_real: 0.102 D_fake: 0.243 
+(epoch: 11, iters: 3312, time: 0.164) G_GAN: 1.778 G_GAN_Feat: 2.640 G_VGG: 1.377 D_real: 0.411 D_fake: 0.090 
+(epoch: 11, iters: 3612, time: 0.164) G_GAN: 1.359 G_GAN_Feat: 3.177 G_VGG: 1.560 D_real: 0.571 D_fake: 0.494 
+(epoch: 11, iters: 3912, time: 0.164) G_GAN: 1.127 G_GAN_Feat: 2.544 G_VGG: 1.268 D_real: 0.544 D_fake: 0.169 
+(epoch: 11, iters: 4212, time: 0.164) G_GAN: 0.788 G_GAN_Feat: 2.951 G_VGG: 1.492 D_real: 0.277 D_fake: 0.441 
+(epoch: 11, iters: 4512, time: 0.164) G_GAN: 0.642 G_GAN_Feat: 2.932 G_VGG: 1.224 D_real: 0.065 D_fake: 0.458 
+(epoch: 11, iters: 4812, time: 0.164) G_GAN: 1.512 G_GAN_Feat: 2.488 G_VGG: 1.245 D_real: 0.197 D_fake: 0.086 
+(epoch: 11, iters: 5112, time: 0.164) G_GAN: 0.450 G_GAN_Feat: 2.564 G_VGG: 1.503 D_real: 0.299 D_fake: 0.706 
+(epoch: 11, iters: 5412, time: 0.164) G_GAN: 1.478 G_GAN_Feat: 2.323 G_VGG: 1.540 D_real: 0.779 D_fake: 0.082 
+(epoch: 11, iters: 5712, time: 0.164) G_GAN: 1.183 G_GAN_Feat: 2.152 G_VGG: 1.169 D_real: 0.401 D_fake: 0.147 
+(epoch: 11, iters: 6012, time: 0.164) G_GAN: 1.753 G_GAN_Feat: 2.983 G_VGG: 1.437 D_real: 0.195 D_fake: 0.065 
+(epoch: 11, iters: 6312, time: 0.164) G_GAN: 1.788 G_GAN_Feat: 2.456 G_VGG: 1.253 D_real: 0.546 D_fake: 0.044 
+(epoch: 11, iters: 6612, time: 0.164) G_GAN: 1.351 G_GAN_Feat: 3.045 G_VGG: 1.310 D_real: 0.155 D_fake: 0.124 
+(epoch: 11, iters: 6912, time: 0.164) G_GAN: 1.088 G_GAN_Feat: 2.481 G_VGG: 1.390 D_real: 0.071 D_fake: 0.236 
+(epoch: 11, iters: 7212, time: 0.164) G_GAN: 1.436 G_GAN_Feat: 3.267 G_VGG: 1.722 D_real: 0.174 D_fake: 0.108 
+(epoch: 11, iters: 7512, time: 0.164) G_GAN: 1.202 G_GAN_Feat: 2.335 G_VGG: 1.071 D_real: 0.346 D_fake: 0.163 
+(epoch: 11, iters: 7812, time: 0.164) G_GAN: 0.490 G_GAN_Feat: 2.769 G_VGG: 1.554 D_real: 0.089 D_fake: 0.672 
+(epoch: 11, iters: 8112, time: 0.164) G_GAN: 1.041 G_GAN_Feat: 3.369 G_VGG: 1.383 D_real: 0.072 D_fake: 0.235 
+(epoch: 11, iters: 8412, time: 0.164) G_GAN: 0.970 G_GAN_Feat: 3.518 G_VGG: 1.922 D_real: 0.102 D_fake: 0.313 
+(epoch: 11, iters: 8712, time: 0.164) G_GAN: 0.679 G_GAN_Feat: 3.128 G_VGG: 1.740 D_real: 0.150 D_fake: 0.432 
+(epoch: 11, iters: 9012, time: 0.164) G_GAN: 1.174 G_GAN_Feat: 2.610 G_VGG: 1.364 D_real: 0.382 D_fake: 0.189 
+(epoch: 11, iters: 9312, time: 0.164) G_GAN: 1.603 G_GAN_Feat: 3.290 G_VGG: 1.270 D_real: 0.184 D_fake: 0.081 
+(epoch: 11, iters: 9612, time: 0.164) G_GAN: 1.738 G_GAN_Feat: 2.934 G_VGG: 1.480 D_real: 0.202 D_fake: 0.051 
+(epoch: 11, iters: 9912, time: 0.164) G_GAN: 1.328 G_GAN_Feat: 2.305 G_VGG: 1.186 D_real: 0.415 D_fake: 0.097 
+Acc: 90.27060717344284
+End of epoch 11 / 200 	 Time Taken: 1642 sec
+saving the model at the end of epoch 11, iters 109956
+(epoch: 12, iters: 216, time: 0.189) G_GAN: 0.670 G_GAN_Feat: 2.576 G_VGG: 1.363 D_real: 0.170 D_fake: 0.446 
+(epoch: 12, iters: 516, time: 0.164) G_GAN: 1.249 G_GAN_Feat: 2.549 G_VGG: 1.332 D_real: 0.319 D_fake: 0.137 
+(epoch: 12, iters: 816, time: 0.164) G_GAN: 0.974 G_GAN_Feat: 2.713 G_VGG: 1.226 D_real: 0.227 D_fake: 0.240 
+(epoch: 12, iters: 1116, time: 0.164) G_GAN: 1.318 G_GAN_Feat: 2.120 G_VGG: 1.048 D_real: 0.081 D_fake: 0.125 
+(epoch: 12, iters: 1416, time: 0.164) G_GAN: 1.177 G_GAN_Feat: 2.427 G_VGG: 1.418 D_real: 0.432 D_fake: 0.143 
+(epoch: 12, iters: 1716, time: 0.164) G_GAN: 1.509 G_GAN_Feat: 2.181 G_VGG: 1.189 D_real: 0.517 D_fake: 0.110 
+(epoch: 12, iters: 2016, time: 0.164) G_GAN: 0.509 G_GAN_Feat: 2.588 G_VGG: 1.257 D_real: 0.342 D_fake: 0.562 
+(epoch: 12, iters: 2316, time: 0.164) G_GAN: 0.748 G_GAN_Feat: 2.365 G_VGG: 1.517 D_real: 0.289 D_fake: 0.355 
+(epoch: 12, iters: 2616, time: 0.164) G_GAN: 1.087 G_GAN_Feat: 2.941 G_VGG: 1.629 D_real: 0.415 D_fake: 0.219 
+(epoch: 12, iters: 2916, time: 0.164) G_GAN: 1.731 G_GAN_Feat: 3.096 G_VGG: 1.172 D_real: 0.223 D_fake: 0.083 
+(epoch: 12, iters: 3216, time: 0.164) G_GAN: 1.189 G_GAN_Feat: 2.818 G_VGG: 1.468 D_real: 0.283 D_fake: 0.162 
+(epoch: 12, iters: 3516, time: 0.164) G_GAN: 1.588 G_GAN_Feat: 2.390 G_VGG: 1.118 D_real: 0.423 D_fake: 0.108 
+(epoch: 12, iters: 3816, time: 0.164) G_GAN: 1.185 G_GAN_Feat: 3.001 G_VGG: 1.347 D_real: 0.460 D_fake: 0.183 
+(epoch: 12, iters: 4116, time: 0.164) G_GAN: 1.293 G_GAN_Feat: 3.074 G_VGG: 1.481 D_real: 0.446 D_fake: 0.180 
+(epoch: 12, iters: 4416, time: 0.165) G_GAN: 1.064 G_GAN_Feat: 2.116 G_VGG: 1.543 D_real: 0.741 D_fake: 0.300 
+(epoch: 12, iters: 4716, time: 0.164) G_GAN: 1.173 G_GAN_Feat: 2.105 G_VGG: 1.282 D_real: 0.365 D_fake: 0.171 
+(epoch: 12, iters: 5016, time: 0.164) G_GAN: 1.317 G_GAN_Feat: 2.879 G_VGG: 1.360 D_real: 0.231 D_fake: 0.130 
+(epoch: 12, iters: 5316, time: 0.165) G_GAN: 0.805 G_GAN_Feat: 2.708 G_VGG: 1.240 D_real: 0.374 D_fake: 0.318 
+(epoch: 12, iters: 5616, time: 0.164) G_GAN: 1.073 G_GAN_Feat: 2.566 G_VGG: 1.311 D_real: 0.227 D_fake: 0.256 
+(epoch: 12, iters: 5916, time: 0.164) G_GAN: 1.997 G_GAN_Feat: 2.422 G_VGG: 1.148 D_real: 0.421 D_fake: 0.056 
+(epoch: 12, iters: 6216, time: 0.164) G_GAN: 1.435 G_GAN_Feat: 3.081 G_VGG: 1.379 D_real: 0.493 D_fake: 0.099 
+(epoch: 12, iters: 6516, time: 0.164) G_GAN: 1.709 G_GAN_Feat: 2.676 G_VGG: 1.189 D_real: 0.867 D_fake: 0.069 
+(epoch: 12, iters: 6816, time: 0.165) G_GAN: 0.932 G_GAN_Feat: 2.711 G_VGG: 1.385 D_real: 1.005 D_fake: 0.380 
+(epoch: 12, iters: 7116, time: 0.165) G_GAN: 0.580 G_GAN_Feat: 2.539 G_VGG: 1.979 D_real: 0.476 D_fake: 0.466 
+(epoch: 12, iters: 7416, time: 0.164) G_GAN: 0.783 G_GAN_Feat: 2.627 G_VGG: 1.454 D_real: 0.453 D_fake: 0.320 
+(epoch: 12, iters: 7716, time: 0.164) G_GAN: 1.218 G_GAN_Feat: 2.594 G_VGG: 1.450 D_real: 0.287 D_fake: 0.154 
+(epoch: 12, iters: 8016, time: 0.165) G_GAN: 1.344 G_GAN_Feat: 2.958 G_VGG: 1.614 D_real: 0.160 D_fake: 0.103 
+(epoch: 12, iters: 8316, time: 0.165) G_GAN: 1.152 G_GAN_Feat: 3.044 G_VGG: 1.569 D_real: 0.113 D_fake: 0.170 
+(epoch: 12, iters: 8616, time: 0.164) G_GAN: 1.198 G_GAN_Feat: 2.407 G_VGG: 1.185 D_real: 0.178 D_fake: 0.191 
+(epoch: 12, iters: 8916, time: 0.165) G_GAN: 2.194 G_GAN_Feat: 2.456 G_VGG: 1.197 D_real: 0.596 D_fake: 0.043 
+(epoch: 12, iters: 9216, time: 0.165) G_GAN: 0.932 G_GAN_Feat: 2.784 G_VGG: 1.675 D_real: 0.110 D_fake: 0.260 
+(epoch: 12, iters: 9516, time: 0.165) G_GAN: 1.858 G_GAN_Feat: 3.124 G_VGG: 1.391 D_real: 0.282 D_fake: 0.064 
+(epoch: 12, iters: 9816, time: 0.165) G_GAN: 1.323 G_GAN_Feat: 2.733 G_VGG: 1.371 D_real: 0.365 D_fake: 0.117 
+Acc: 93.48497241735458
+End of epoch 12 / 200 	 Time Taken: 1644 sec
+saving the model at the end of epoch 12, iters 119952
+(epoch: 13, iters: 120, time: 0.190) G_GAN: 0.781 G_GAN_Feat: 2.336 G_VGG: 1.179 D_real: 0.277 D_fake: 0.420 
+(epoch: 13, iters: 420, time: 0.164) G_GAN: 1.648 G_GAN_Feat: 2.758 G_VGG: 1.189 D_real: 0.199 D_fake: 0.066 
+(epoch: 13, iters: 720, time: 0.165) G_GAN: 1.528 G_GAN_Feat: 2.708 G_VGG: 1.222 D_real: 0.196 D_fake: 0.072 
+(epoch: 13, iters: 1020, time: 0.164) G_GAN: 1.617 G_GAN_Feat: 2.581 G_VGG: 1.250 D_real: 0.563 D_fake: 0.065 
+(epoch: 13, iters: 1320, time: 0.165) G_GAN: 1.074 G_GAN_Feat: 2.458 G_VGG: 1.274 D_real: 0.157 D_fake: 0.213 
+(epoch: 13, iters: 1620, time: 0.165) G_GAN: 1.703 G_GAN_Feat: 3.010 G_VGG: 1.375 D_real: 0.192 D_fake: 0.123 
+(epoch: 13, iters: 1920, time: 0.165) G_GAN: 0.767 G_GAN_Feat: 2.651 G_VGG: 1.572 D_real: 0.353 D_fake: 0.373 
+(epoch: 13, iters: 2220, time: 0.165) G_GAN: 1.068 G_GAN_Feat: 2.456 G_VGG: 1.239 D_real: 0.291 D_fake: 0.201 
+(epoch: 13, iters: 2520, time: 0.165) G_GAN: 1.193 G_GAN_Feat: 2.963 G_VGG: 1.858 D_real: 0.320 D_fake: 0.213 
+(epoch: 13, iters: 2820, time: 0.165) G_GAN: 1.497 G_GAN_Feat: 2.855 G_VGG: 1.771 D_real: 0.399 D_fake: 0.112 
+(epoch: 13, iters: 3120, time: 0.165) G_GAN: 0.988 G_GAN_Feat: 3.009 G_VGG: 1.569 D_real: 0.264 D_fake: 0.245 
+(epoch: 13, iters: 3420, time: 0.165) G_GAN: 1.367 G_GAN_Feat: 3.122 G_VGG: 1.575 D_real: 0.352 D_fake: 0.120 
+(epoch: 13, iters: 3720, time: 0.165) G_GAN: 1.131 G_GAN_Feat: 2.351 G_VGG: 1.272 D_real: 0.536 D_fake: 0.482 
+(epoch: 13, iters: 4020, time: 0.165) G_GAN: 0.999 G_GAN_Feat: 3.722 G_VGG: 1.832 D_real: 0.449 D_fake: 0.252 
+(epoch: 13, iters: 4320, time: 0.164) G_GAN: 1.419 G_GAN_Feat: 2.600 G_VGG: 1.382 D_real: 0.022 D_fake: 0.081 
+(epoch: 13, iters: 4620, time: 0.165) G_GAN: 1.733 G_GAN_Feat: 2.910 G_VGG: 1.367 D_real: 0.487 D_fake: 0.098 
+(epoch: 13, iters: 4920, time: 0.165) G_GAN: 1.463 G_GAN_Feat: 2.480 G_VGG: 1.300 D_real: 0.281 D_fake: 0.139 
+(epoch: 13, iters: 5220, time: 0.165) G_GAN: 1.269 G_GAN_Feat: 2.622 G_VGG: 1.275 D_real: 0.251 D_fake: 0.305 
+(epoch: 13, iters: 5520, time: 0.165) G_GAN: 1.357 G_GAN_Feat: 2.979 G_VGG: 1.385 D_real: 0.261 D_fake: 0.130 
+(epoch: 13, iters: 5820, time: 0.165) G_GAN: 0.971 G_GAN_Feat: 3.137 G_VGG: 1.724 D_real: 0.365 D_fake: 0.247 
+(epoch: 13, iters: 6120, time: 0.165) G_GAN: 0.504 G_GAN_Feat: 2.236 G_VGG: 1.332 D_real: 0.432 D_fake: 1.176 
+(epoch: 13, iters: 6420, time: 0.165) G_GAN: 0.737 G_GAN_Feat: 2.593 G_VGG: 1.152 D_real: 0.634 D_fake: 0.391 
+(epoch: 13, iters: 6720, time: 0.165) G_GAN: 1.065 G_GAN_Feat: 2.642 G_VGG: 1.559 D_real: 0.301 D_fake: 0.184 
+(epoch: 13, iters: 7020, time: 0.165) G_GAN: 1.229 G_GAN_Feat: 2.653 G_VGG: 1.304 D_real: 0.473 D_fake: 0.209 
+(epoch: 13, iters: 7320, time: 0.165) G_GAN: 0.635 G_GAN_Feat: 2.358 G_VGG: 1.163 D_real: 0.286 D_fake: 0.429 
+(epoch: 13, iters: 7620, time: 0.165) G_GAN: 1.464 G_GAN_Feat: 2.768 G_VGG: 1.584 D_real: 0.037 D_fake: 0.093 
+(epoch: 13, iters: 7920, time: 0.165) G_GAN: 1.026 G_GAN_Feat: 2.605 G_VGG: 1.366 D_real: 0.894 D_fake: 0.765 
+(epoch: 13, iters: 8220, time: 0.165) G_GAN: 1.183 G_GAN_Feat: 2.855 G_VGG: 1.515 D_real: 0.494 D_fake: 0.200 
+(epoch: 13, iters: 8520, time: 0.165) G_GAN: 0.981 G_GAN_Feat: 1.863 G_VGG: 1.151 D_real: 0.478 D_fake: 0.224 
+(epoch: 13, iters: 8820, time: 0.165) G_GAN: 1.470 G_GAN_Feat: 2.281 G_VGG: 1.323 D_real: 0.034 D_fake: 0.106 
+(epoch: 13, iters: 9120, time: 0.165) G_GAN: 1.208 G_GAN_Feat: 2.826 G_VGG: 1.361 D_real: 0.407 D_fake: 0.131 
+(epoch: 13, iters: 9420, time: 0.165) G_GAN: 0.947 G_GAN_Feat: 2.734 G_VGG: 1.494 D_real: 0.245 D_fake: 0.370 
+(epoch: 13, iters: 9720, time: 0.165) G_GAN: 1.215 G_GAN_Feat: 2.419 G_VGG: 1.232 D_real: 0.211 D_fake: 0.148 
+Acc: 92.08293780684471
+End of epoch 13 / 200 	 Time Taken: 1646 sec
+saving the model at the end of epoch 13, iters 129948
+(epoch: 14, iters: 24, time: 0.190) G_GAN: 1.506 G_GAN_Feat: 3.265 G_VGG: 1.310 D_real: 0.257 D_fake: 0.077 
+(epoch: 14, iters: 324, time: 0.164) G_GAN: 1.293 G_GAN_Feat: 2.908 G_VGG: 1.592 D_real: 0.308 D_fake: 0.131 
+(epoch: 14, iters: 624, time: 0.165) G_GAN: 1.229 G_GAN_Feat: 2.785 G_VGG: 1.148 D_real: 0.181 D_fake: 0.150 
+(epoch: 14, iters: 924, time: 0.165) G_GAN: 1.466 G_GAN_Feat: 2.916 G_VGG: 1.560 D_real: 0.307 D_fake: 0.143 
+(epoch: 14, iters: 1224, time: 0.165) G_GAN: 0.943 G_GAN_Feat: 3.423 G_VGG: 1.666 D_real: 0.072 D_fake: 0.263 
+(epoch: 14, iters: 1524, time: 0.165) G_GAN: 1.553 G_GAN_Feat: 2.682 G_VGG: 1.181 D_real: 0.452 D_fake: 0.084 
+(epoch: 14, iters: 1824, time: 0.165) G_GAN: 1.012 G_GAN_Feat: 2.176 G_VGG: 1.092 D_real: 0.150 D_fake: 0.233 
+(epoch: 14, iters: 2124, time: 0.165) G_GAN: 0.649 G_GAN_Feat: 2.288 G_VGG: 1.285 D_real: 0.563 D_fake: 0.424 
+(epoch: 14, iters: 2424, time: 0.165) G_GAN: 0.842 G_GAN_Feat: 2.737 G_VGG: 1.471 D_real: 0.324 D_fake: 0.310 
+(epoch: 14, iters: 2724, time: 0.165) G_GAN: 1.206 G_GAN_Feat: 2.539 G_VGG: 1.560 D_real: 0.349 D_fake: 0.209 
+(epoch: 14, iters: 3024, time: 0.165) G_GAN: 1.457 G_GAN_Feat: 2.432 G_VGG: 1.066 D_real: 0.110 D_fake: 0.108 
+(epoch: 14, iters: 3324, time: 0.165) G_GAN: 0.944 G_GAN_Feat: 2.559 G_VGG: 1.223 D_real: 0.296 D_fake: 0.245 
+(epoch: 14, iters: 3624, time: 0.165) G_GAN: 0.988 G_GAN_Feat: 2.500 G_VGG: 1.336 D_real: 0.091 D_fake: 0.235 
+(epoch: 14, iters: 3924, time: 0.165) G_GAN: 1.580 G_GAN_Feat: 2.694 G_VGG: 1.358 D_real: 0.242 D_fake: 0.084 
+(epoch: 14, iters: 4224, time: 0.165) G_GAN: 0.958 G_GAN_Feat: 2.483 G_VGG: 1.115 D_real: 0.088 D_fake: 0.287 
+(epoch: 14, iters: 4524, time: 0.165) G_GAN: 1.299 G_GAN_Feat: 3.375 G_VGG: 1.324 D_real: 0.049 D_fake: 0.215 
+(epoch: 14, iters: 4824, time: 0.165) G_GAN: 1.833 G_GAN_Feat: 2.505 G_VGG: 1.041 D_real: 0.418 D_fake: 0.092 
+(epoch: 14, iters: 5124, time: 0.165) G_GAN: 0.758 G_GAN_Feat: 2.764 G_VGG: 1.278 D_real: 0.082 D_fake: 0.357 
+(epoch: 14, iters: 5424, time: 0.165) G_GAN: 1.060 G_GAN_Feat: 2.791 G_VGG: 1.563 D_real: 0.221 D_fake: 0.256 
+(epoch: 14, iters: 5724, time: 0.165) G_GAN: 1.356 G_GAN_Feat: 2.585 G_VGG: 1.379 D_real: 0.449 D_fake: 0.143 
+(epoch: 14, iters: 6024, time: 0.165) G_GAN: 0.681 G_GAN_Feat: 2.304 G_VGG: 1.171 D_real: 0.388 D_fake: 0.399 
+(epoch: 14, iters: 6324, time: 0.165) G_GAN: 0.800 G_GAN_Feat: 2.505 G_VGG: 1.212 D_real: 0.644 D_fake: 0.386 
+(epoch: 14, iters: 6624, time: 0.165) G_GAN: 0.950 G_GAN_Feat: 2.549 G_VGG: 1.096 D_real: 1.266 D_fake: 0.269 
+(epoch: 14, iters: 6924, time: 0.165) G_GAN: 1.386 G_GAN_Feat: 2.279 G_VGG: 1.203 D_real: 0.578 D_fake: 0.153 
+(epoch: 14, iters: 7224, time: 0.165) G_GAN: 1.019 G_GAN_Feat: 2.257 G_VGG: 1.204 D_real: 0.507 D_fake: 0.212 
+(epoch: 14, iters: 7524, time: 0.165) G_GAN: 1.576 G_GAN_Feat: 2.704 G_VGG: 1.213 D_real: 0.355 D_fake: 0.086 
+(epoch: 14, iters: 7824, time: 0.165) G_GAN: 0.840 G_GAN_Feat: 2.580 G_VGG: 1.036 D_real: 0.066 D_fake: 0.411 
+(epoch: 14, iters: 8124, time: 0.165) G_GAN: 0.912 G_GAN_Feat: 3.347 G_VGG: 1.399 D_real: 0.165 D_fake: 0.292 
+(epoch: 14, iters: 8424, time: 0.165) G_GAN: 1.273 G_GAN_Feat: 2.804 G_VGG: 1.419 D_real: 0.312 D_fake: 0.379 
+(epoch: 14, iters: 8724, time: 0.165) G_GAN: 1.632 G_GAN_Feat: 2.685 G_VGG: 1.245 D_real: 0.252 D_fake: 0.257 
+(epoch: 14, iters: 9024, time: 0.164) G_GAN: 1.507 G_GAN_Feat: 3.114 G_VGG: 1.543 D_real: 0.079 D_fake: 0.098 
+(epoch: 14, iters: 9324, time: 0.165) G_GAN: 1.227 G_GAN_Feat: 3.136 G_VGG: 1.523 D_real: 0.163 D_fake: 0.170 
+(epoch: 14, iters: 9624, time: 0.165) G_GAN: 1.273 G_GAN_Feat: 2.679 G_VGG: 1.209 D_real: 0.173 D_fake: 0.203 
+(epoch: 14, iters: 9924, time: 0.165) G_GAN: 1.031 G_GAN_Feat: 2.524 G_VGG: 1.253 D_real: 0.405 D_fake: 0.197 
+Acc: 89.09506499767303
+End of epoch 14 / 200 	 Time Taken: 1646 sec
+saving the model at the end of epoch 14, iters 139944
+(epoch: 15, iters: 228, time: 0.190) G_GAN: 0.864 G_GAN_Feat: 3.458 G_VGG: 1.713 D_real: 0.270 D_fake: 0.354 
+(epoch: 15, iters: 528, time: 0.165) G_GAN: 0.805 G_GAN_Feat: 2.396 G_VGG: 1.153 D_real: 0.181 D_fake: 0.304 
+(epoch: 15, iters: 828, time: 0.165) G_GAN: 0.507 G_GAN_Feat: 2.390 G_VGG: 0.982 D_real: 0.157 D_fake: 0.569 
+(epoch: 15, iters: 1128, time: 0.165) G_GAN: 1.380 G_GAN_Feat: 2.272 G_VGG: 1.016 D_real: 0.358 D_fake: 0.247 
+(epoch: 15, iters: 1428, time: 0.165) G_GAN: 1.340 G_GAN_Feat: 2.571 G_VGG: 1.406 D_real: 0.182 D_fake: 0.204 
+(epoch: 15, iters: 1728, time: 0.165) G_GAN: 0.991 G_GAN_Feat: 3.241 G_VGG: 1.610 D_real: 0.166 D_fake: 0.222 
+(epoch: 15, iters: 2028, time: 0.165) G_GAN: 1.312 G_GAN_Feat: 2.947 G_VGG: 1.354 D_real: 0.266 D_fake: 0.102 
+(epoch: 15, iters: 2328, time: 0.165) G_GAN: 1.873 G_GAN_Feat: 2.443 G_VGG: 1.210 D_real: 0.488 D_fake: 0.140 
+(epoch: 15, iters: 2628, time: 0.165) G_GAN: 0.650 G_GAN_Feat: 2.562 G_VGG: 1.267 D_real: 0.346 D_fake: 0.540 
+(epoch: 15, iters: 2928, time: 0.165) G_GAN: 0.927 G_GAN_Feat: 2.580 G_VGG: 1.504 D_real: 0.171 D_fake: 0.313 
+(epoch: 15, iters: 3228, time: 0.165) G_GAN: 1.185 G_GAN_Feat: 2.534 G_VGG: 1.346 D_real: 0.338 D_fake: 0.240 
+(epoch: 15, iters: 3528, time: 0.165) G_GAN: 0.691 G_GAN_Feat: 2.172 G_VGG: 1.055 D_real: 0.323 D_fake: 0.386 
+(epoch: 15, iters: 3828, time: 0.165) G_GAN: 1.101 G_GAN_Feat: 2.686 G_VGG: 1.341 D_real: 0.283 D_fake: 0.203 
+(epoch: 15, iters: 4128, time: 0.165) G_GAN: 1.039 G_GAN_Feat: 2.531 G_VGG: 1.096 D_real: 0.323 D_fake: 0.230 
+(epoch: 15, iters: 4428, time: 0.165) G_GAN: 0.800 G_GAN_Feat: 2.387 G_VGG: 1.310 D_real: 0.309 D_fake: 0.346 
+(epoch: 15, iters: 4728, time: 0.165) G_GAN: 2.193 G_GAN_Feat: 3.468 G_VGG: 1.506 D_real: 0.106 D_fake: 0.039 
+(epoch: 15, iters: 5028, time: 0.165) G_GAN: 0.750 G_GAN_Feat: 2.401 G_VGG: 1.380 D_real: 0.316 D_fake: 0.527 
+(epoch: 15, iters: 5328, time: 0.165) G_GAN: 1.326 G_GAN_Feat: 2.766 G_VGG: 1.315 D_real: 0.319 D_fake: 0.212 
+(epoch: 15, iters: 5628, time: 0.165) G_GAN: 0.646 G_GAN_Feat: 1.423 G_VGG: 1.296 D_real: 0.568 D_fake: 0.504 
+(epoch: 15, iters: 5928, time: 0.165) G_GAN: 0.611 G_GAN_Feat: 1.212 G_VGG: 1.110 D_real: 0.537 D_fake: 0.420 
+(epoch: 15, iters: 6228, time: 0.165) G_GAN: 0.461 G_GAN_Feat: 1.135 G_VGG: 1.008 D_real: 0.448 D_fake: 0.553 
+(epoch: 15, iters: 6528, time: 0.165) G_GAN: 0.506 G_GAN_Feat: 1.478 G_VGG: 1.307 D_real: 0.437 D_fake: 0.506 
+(epoch: 15, iters: 6828, time: 0.165) G_GAN: 0.519 G_GAN_Feat: 1.552 G_VGG: 1.216 D_real: 0.529 D_fake: 0.508 
+(epoch: 15, iters: 7128, time: 0.165) G_GAN: 0.573 G_GAN_Feat: 1.409 G_VGG: 1.196 D_real: 0.532 D_fake: 0.447 
+(epoch: 15, iters: 7428, time: 0.165) G_GAN: 0.519 G_GAN_Feat: 1.776 G_VGG: 1.400 D_real: 0.397 D_fake: 0.499 
+(epoch: 15, iters: 7728, time: 0.165) G_GAN: 0.595 G_GAN_Feat: 1.630 G_VGG: 1.199 D_real: 0.547 D_fake: 0.426 
+(epoch: 15, iters: 8028, time: 0.165) G_GAN: 0.615 G_GAN_Feat: 1.923 G_VGG: 1.122 D_real: 0.471 D_fake: 0.416 
+(epoch: 15, iters: 8328, time: 0.165) G_GAN: 0.590 G_GAN_Feat: 1.831 G_VGG: 1.084 D_real: 0.565 D_fake: 0.440 
+(epoch: 15, iters: 8628, time: 0.165) G_GAN: 0.647 G_GAN_Feat: 2.151 G_VGG: 1.359 D_real: 0.550 D_fake: 0.391 
+(epoch: 15, iters: 8928, time: 0.165) G_GAN: 0.495 G_GAN_Feat: 2.163 G_VGG: 1.319 D_real: 0.333 D_fake: 0.529 
+(epoch: 15, iters: 9228, time: 0.165) G_GAN: 0.608 G_GAN_Feat: 2.091 G_VGG: 1.448 D_real: 0.525 D_fake: 0.425 
+(epoch: 15, iters: 9528, time: 0.165) G_GAN: 0.575 G_GAN_Feat: 1.927 G_VGG: 1.068 D_real: 0.496 D_fake: 0.446 
+(epoch: 15, iters: 9828, time: 0.165) G_GAN: 0.801 G_GAN_Feat: 1.997 G_VGG: 1.518 D_real: 0.716 D_fake: 0.288 
+Acc: 92.53043979406357
+End of epoch 15 / 200 	 Time Taken: 1647 sec
+saving the model at the end of epoch 15, iters 149940
+(epoch: 16, iters: 132, time: 0.190) G_GAN: 0.538 G_GAN_Feat: 2.026 G_VGG: 1.302 D_real: 0.478 D_fake: 0.495 
+(epoch: 16, iters: 432, time: 0.165) G_GAN: 0.525 G_GAN_Feat: 2.039 G_VGG: 0.895 D_real: 0.340 D_fake: 0.498 
+(epoch: 16, iters: 732, time: 0.165) G_GAN: 0.544 G_GAN_Feat: 2.067 G_VGG: 1.125 D_real: 0.380 D_fake: 0.513 
+(epoch: 16, iters: 1032, time: 0.165) G_GAN: 0.541 G_GAN_Feat: 2.057 G_VGG: 1.114 D_real: 0.435 D_fake: 0.545 
+(epoch: 16, iters: 1332, time: 0.165) G_GAN: 0.429 G_GAN_Feat: 2.036 G_VGG: 1.340 D_real: 0.291 D_fake: 0.603 
+(epoch: 16, iters: 1632, time: 0.165) G_GAN: 0.471 G_GAN_Feat: 2.169 G_VGG: 1.168 D_real: 0.371 D_fake: 0.613 
+(epoch: 16, iters: 1932, time: 0.165) G_GAN: 0.967 G_GAN_Feat: 2.459 G_VGG: 1.515 D_real: 0.818 D_fake: 0.229 
+(epoch: 16, iters: 2232, time: 0.165) G_GAN: 0.466 G_GAN_Feat: 2.846 G_VGG: 1.772 D_real: 0.352 D_fake: 0.613 
+(epoch: 16, iters: 2532, time: 0.165) G_GAN: 0.770 G_GAN_Feat: 1.899 G_VGG: 1.078 D_real: 0.636 D_fake: 0.346 
+(epoch: 16, iters: 2832, time: 0.165) G_GAN: 0.543 G_GAN_Feat: 2.340 G_VGG: 1.124 D_real: 0.372 D_fake: 0.485 
+(epoch: 16, iters: 3132, time: 0.165) G_GAN: 0.570 G_GAN_Feat: 2.182 G_VGG: 1.161 D_real: 0.501 D_fake: 0.472 
+(epoch: 16, iters: 3432, time: 0.165) G_GAN: 0.557 G_GAN_Feat: 2.118 G_VGG: 1.262 D_real: 0.392 D_fake: 0.495 
+(epoch: 16, iters: 3732, time: 0.165) G_GAN: 0.491 G_GAN_Feat: 2.748 G_VGG: 1.474 D_real: 0.240 D_fake: 0.560 
+(epoch: 16, iters: 4032, time: 0.165) G_GAN: 0.790 G_GAN_Feat: 2.245 G_VGG: 1.077 D_real: 0.389 D_fake: 0.367 
+(epoch: 16, iters: 4332, time: 0.165) G_GAN: 0.845 G_GAN_Feat: 2.489 G_VGG: 1.264 D_real: 0.332 D_fake: 0.399 
+(epoch: 16, iters: 4632, time: 0.165) G_GAN: 0.580 G_GAN_Feat: 2.426 G_VGG: 1.349 D_real: 0.406 D_fake: 0.496 
+(epoch: 16, iters: 4932, time: 0.165) G_GAN: 1.101 G_GAN_Feat: 2.163 G_VGG: 1.174 D_real: 0.555 D_fake: 0.232 
+(epoch: 16, iters: 5232, time: 0.165) G_GAN: 0.464 G_GAN_Feat: 2.357 G_VGG: 1.374 D_real: 0.351 D_fake: 0.634 
+(epoch: 16, iters: 5532, time: 0.165) G_GAN: 0.749 G_GAN_Feat: 2.328 G_VGG: 1.263 D_real: 0.582 D_fake: 0.416 
+(epoch: 16, iters: 5832, time: 0.165) G_GAN: 0.348 G_GAN_Feat: 2.341 G_VGG: 1.154 D_real: 0.208 D_fake: 0.755 
+(epoch: 16, iters: 6132, time: 0.165) G_GAN: 0.646 G_GAN_Feat: 2.409 G_VGG: 1.393 D_real: 0.483 D_fake: 0.410 
+(epoch: 16, iters: 6432, time: 0.165) G_GAN: 0.778 G_GAN_Feat: 2.500 G_VGG: 1.481 D_real: 0.531 D_fake: 0.337 
+(epoch: 16, iters: 6732, time: 0.165) G_GAN: 1.103 G_GAN_Feat: 2.265 G_VGG: 1.047 D_real: 0.416 D_fake: 0.227 
+(epoch: 16, iters: 7032, time: 0.165) G_GAN: 0.554 G_GAN_Feat: 2.804 G_VGG: 1.649 D_real: 0.378 D_fake: 0.522 
+(epoch: 16, iters: 7332, time: 0.165) G_GAN: 0.578 G_GAN_Feat: 2.582 G_VGG: 1.369 D_real: 0.307 D_fake: 0.513 
+(epoch: 16, iters: 7632, time: 0.165) G_GAN: 0.573 G_GAN_Feat: 2.293 G_VGG: 1.141 D_real: 0.374 D_fake: 0.475 
+(epoch: 16, iters: 7932, time: 0.165) G_GAN: 0.459 G_GAN_Feat: 2.200 G_VGG: 1.038 D_real: 0.315 D_fake: 0.585 
+(epoch: 16, iters: 8232, time: 0.165) G_GAN: 0.953 G_GAN_Feat: 2.200 G_VGG: 1.132 D_real: 0.637 D_fake: 0.261 
+(epoch: 16, iters: 8532, time: 0.165) G_GAN: 0.774 G_GAN_Feat: 2.641 G_VGG: 1.348 D_real: 0.378 D_fake: 0.387 
+(epoch: 16, iters: 8832, time: 0.165) G_GAN: 0.634 G_GAN_Feat: 2.737 G_VGG: 1.659 D_real: 0.389 D_fake: 0.415 
+(epoch: 16, iters: 9132, time: 0.165) G_GAN: 1.102 G_GAN_Feat: 2.723 G_VGG: 1.125 D_real: 0.321 D_fake: 0.277 
+(epoch: 16, iters: 9432, time: 0.165) G_GAN: 0.502 G_GAN_Feat: 2.537 G_VGG: 1.418 D_real: 0.287 D_fake: 0.571 
+(epoch: 16, iters: 9732, time: 0.165) G_GAN: 0.755 G_GAN_Feat: 2.695 G_VGG: 1.435 D_real: 0.454 D_fake: 0.375 
+Acc: 92.0458659529686
+End of epoch 16 / 200 	 Time Taken: 1648 sec
+saving the model at the end of epoch 16, iters 159936
+(epoch: 17, iters: 36, time: 0.190) G_GAN: 0.902 G_GAN_Feat: 3.050 G_VGG: 1.463 D_real: 0.587 D_fake: 0.277 
+(epoch: 17, iters: 336, time: 0.165) G_GAN: 0.561 G_GAN_Feat: 2.376 G_VGG: 1.274 D_real: 0.412 D_fake: 0.501 
+(epoch: 17, iters: 636, time: 0.165) G_GAN: 0.805 G_GAN_Feat: 2.148 G_VGG: 1.134 D_real: 0.592 D_fake: 0.332 
+(epoch: 17, iters: 936, time: 0.165) G_GAN: 0.620 G_GAN_Feat: 2.408 G_VGG: 1.145 D_real: 0.336 D_fake: 0.449 
+(epoch: 17, iters: 1236, time: 0.165) G_GAN: 0.969 G_GAN_Feat: 2.700 G_VGG: 1.443 D_real: 0.479 D_fake: 0.297 
+(epoch: 17, iters: 1536, time: 0.165) G_GAN: 0.730 G_GAN_Feat: 2.966 G_VGG: 1.493 D_real: 0.382 D_fake: 0.349 
+(epoch: 17, iters: 1836, time: 0.165) G_GAN: 0.914 G_GAN_Feat: 2.602 G_VGG: 1.318 D_real: 0.341 D_fake: 0.471 
+(epoch: 17, iters: 2136, time: 0.165) G_GAN: 0.862 G_GAN_Feat: 2.425 G_VGG: 1.134 D_real: 0.394 D_fake: 0.340 
+(epoch: 17, iters: 2436, time: 0.165) G_GAN: 0.513 G_GAN_Feat: 2.647 G_VGG: 1.455 D_real: 0.189 D_fake: 0.626 
+(epoch: 17, iters: 2736, time: 0.165) G_GAN: 0.990 G_GAN_Feat: 2.551 G_VGG: 1.393 D_real: 0.356 D_fake: 0.270 
+(epoch: 17, iters: 3036, time: 0.165) G_GAN: 0.489 G_GAN_Feat: 2.817 G_VGG: 1.330 D_real: 0.230 D_fake: 0.618 
+(epoch: 17, iters: 3336, time: 0.165) G_GAN: 0.753 G_GAN_Feat: 2.565 G_VGG: 1.385 D_real: 0.173 D_fake: 0.493 
+(epoch: 17, iters: 3636, time: 0.165) G_GAN: 0.641 G_GAN_Feat: 2.355 G_VGG: 1.043 D_real: 0.452 D_fake: 0.425 
+(epoch: 17, iters: 3936, time: 0.165) G_GAN: 0.655 G_GAN_Feat: 2.602 G_VGG: 1.544 D_real: 0.333 D_fake: 0.432 
+(epoch: 17, iters: 4236, time: 0.165) G_GAN: 0.573 G_GAN_Feat: 2.783 G_VGG: 1.288 D_real: 0.304 D_fake: 0.544 
+(epoch: 17, iters: 4536, time: 0.165) G_GAN: 1.083 G_GAN_Feat: 2.800 G_VGG: 1.644 D_real: 0.549 D_fake: 0.209 
+(epoch: 17, iters: 4836, time: 0.165) G_GAN: 0.646 G_GAN_Feat: 2.359 G_VGG: 1.239 D_real: 0.454 D_fake: 0.438 
+(epoch: 17, iters: 5136, time: 0.165) G_GAN: 0.708 G_GAN_Feat: 2.385 G_VGG: 1.167 D_real: 0.459 D_fake: 0.403 
+(epoch: 17, iters: 5436, time: 0.165) G_GAN: 0.705 G_GAN_Feat: 2.799 G_VGG: 1.564 D_real: 0.516 D_fake: 0.430 
+(epoch: 17, iters: 5736, time: 0.165) G_GAN: 0.504 G_GAN_Feat: 2.477 G_VGG: 1.208 D_real: 0.319 D_fake: 0.589 
+(epoch: 17, iters: 6036, time: 0.165) G_GAN: 1.344 G_GAN_Feat: 2.561 G_VGG: 1.103 D_real: 0.442 D_fake: 0.331 
+(epoch: 17, iters: 6336, time: 0.165) G_GAN: 0.648 G_GAN_Feat: 3.072 G_VGG: 1.325 D_real: 0.398 D_fake: 0.423 
+(epoch: 17, iters: 6636, time: 0.165) G_GAN: 0.449 G_GAN_Feat: 2.453 G_VGG: 1.131 D_real: 0.325 D_fake: 0.736 
+(epoch: 17, iters: 6936, time: 0.165) G_GAN: 0.736 G_GAN_Feat: 2.645 G_VGG: 1.606 D_real: 0.499 D_fake: 0.372 
+(epoch: 17, iters: 7236, time: 0.165) G_GAN: 0.722 G_GAN_Feat: 2.512 G_VGG: 1.158 D_real: 0.532 D_fake: 0.382 
+(epoch: 17, iters: 7536, time: 0.165) G_GAN: 0.549 G_GAN_Feat: 2.753 G_VGG: 1.473 D_real: 0.400 D_fake: 0.509 
+(epoch: 17, iters: 7836, time: 0.165) G_GAN: 0.547 G_GAN_Feat: 2.397 G_VGG: 1.099 D_real: 0.397 D_fake: 0.529 
+(epoch: 17, iters: 8136, time: 0.165) G_GAN: 0.659 G_GAN_Feat: 2.958 G_VGG: 1.511 D_real: 0.366 D_fake: 0.441 
+(epoch: 17, iters: 8436, time: 0.165) G_GAN: 0.705 G_GAN_Feat: 2.517 G_VGG: 1.321 D_real: 0.331 D_fake: 0.390 
+(epoch: 17, iters: 8736, time: 0.165) G_GAN: 0.617 G_GAN_Feat: 3.016 G_VGG: 1.453 D_real: 0.340 D_fake: 0.504 
+(epoch: 17, iters: 9036, time: 0.165) G_GAN: 0.441 G_GAN_Feat: 2.557 G_VGG: 1.461 D_real: 0.334 D_fake: 0.610 
+(epoch: 17, iters: 9336, time: 0.165) G_GAN: 0.673 G_GAN_Feat: 2.770 G_VGG: 1.505 D_real: 0.401 D_fake: 0.420 
+(epoch: 17, iters: 9636, time: 0.165) G_GAN: 0.784 G_GAN_Feat: 2.848 G_VGG: 1.269 D_real: 0.464 D_fake: 0.356 
+(epoch: 17, iters: 9936, time: 0.165) G_GAN: 0.737 G_GAN_Feat: 2.567 G_VGG: 1.340 D_real: 0.347 D_fake: 0.396 
+Acc: 93.72647926211357
+End of epoch 17 / 200 	 Time Taken: 1649 sec
+saving the model at the end of epoch 17, iters 169932
+(epoch: 18, iters: 240, time: 0.190) G_GAN: 0.703 G_GAN_Feat: 2.663 G_VGG: 1.625 D_real: 0.526 D_fake: 0.375 
+(epoch: 18, iters: 540, time: 0.165) G_GAN: 0.566 G_GAN_Feat: 2.610 G_VGG: 1.352 D_real: 0.284 D_fake: 0.542 
+(epoch: 18, iters: 840, time: 0.165) G_GAN: 0.479 G_GAN_Feat: 2.529 G_VGG: 1.091 D_real: 0.283 D_fake: 0.640 
+(epoch: 18, iters: 1140, time: 0.165) G_GAN: 0.911 G_GAN_Feat: 2.671 G_VGG: 1.455 D_real: 0.515 D_fake: 0.297 
+(epoch: 18, iters: 1440, time: 0.165) G_GAN: 0.654 G_GAN_Feat: 2.583 G_VGG: 1.322 D_real: 0.369 D_fake: 0.441 
+(epoch: 18, iters: 1740, time: 0.165) G_GAN: 1.134 G_GAN_Feat: 2.660 G_VGG: 1.148 D_real: 0.616 D_fake: 0.195 
+(epoch: 18, iters: 2040, time: 0.165) G_GAN: 0.831 G_GAN_Feat: 2.429 G_VGG: 1.294 D_real: 0.476 D_fake: 0.322 
+(epoch: 18, iters: 2340, time: 0.165) G_GAN: 0.744 G_GAN_Feat: 2.798 G_VGG: 1.381 D_real: 0.496 D_fake: 0.367 
+(epoch: 18, iters: 2640, time: 0.165) G_GAN: 0.722 G_GAN_Feat: 3.175 G_VGG: 1.685 D_real: 0.469 D_fake: 0.384 
+(epoch: 18, iters: 2940, time: 0.165) G_GAN: 1.101 G_GAN_Feat: 2.732 G_VGG: 1.063 D_real: 0.446 D_fake: 0.226 
+(epoch: 18, iters: 3240, time: 0.165) G_GAN: 1.118 G_GAN_Feat: 2.473 G_VGG: 1.108 D_real: 0.616 D_fake: 0.333 
+(epoch: 18, iters: 3540, time: 0.165) G_GAN: 0.654 G_GAN_Feat: 2.377 G_VGG: 1.063 D_real: 0.313 D_fake: 0.505 
+(epoch: 18, iters: 3840, time: 0.165) G_GAN: 0.750 G_GAN_Feat: 2.610 G_VGG: 1.059 D_real: 0.336 D_fake: 0.377 
+(epoch: 18, iters: 4140, time: 0.165) G_GAN: 1.024 G_GAN_Feat: 2.574 G_VGG: 0.976 D_real: 0.381 D_fake: 0.239 
+(epoch: 18, iters: 4440, time: 0.165) G_GAN: 1.060 G_GAN_Feat: 2.486 G_VGG: 1.028 D_real: 0.552 D_fake: 0.302 
+(epoch: 18, iters: 4740, time: 0.165) G_GAN: 0.703 G_GAN_Feat: 2.806 G_VGG: 1.404 D_real: 0.336 D_fake: 0.436 
+(epoch: 18, iters: 5040, time: 0.165) G_GAN: 1.641 G_GAN_Feat: 2.733 G_VGG: 1.124 D_real: 0.980 D_fake: 0.108 
+(epoch: 18, iters: 5340, time: 0.165) G_GAN: 0.974 G_GAN_Feat: 2.810 G_VGG: 1.265 D_real: 0.488 D_fake: 0.281 
+(epoch: 18, iters: 5640, time: 0.165) G_GAN: 0.953 G_GAN_Feat: 3.487 G_VGG: 1.496 D_real: 0.435 D_fake: 0.246 
+(epoch: 18, iters: 5940, time: 0.165) G_GAN: 0.755 G_GAN_Feat: 3.375 G_VGG: 1.459 D_real: 0.300 D_fake: 0.363 
+(epoch: 18, iters: 6240, time: 0.165) G_GAN: 0.759 G_GAN_Feat: 2.843 G_VGG: 1.233 D_real: 0.373 D_fake: 0.362 
+(epoch: 18, iters: 6540, time: 0.165) G_GAN: 1.069 G_GAN_Feat: 2.854 G_VGG: 1.292 D_real: 0.315 D_fake: 0.263 
+(epoch: 18, iters: 6840, time: 0.165) G_GAN: 0.716 G_GAN_Feat: 3.306 G_VGG: 1.517 D_real: 0.459 D_fake: 0.439 
+(epoch: 18, iters: 7140, time: 0.165) G_GAN: 0.612 G_GAN_Feat: 2.841 G_VGG: 1.289 D_real: 0.349 D_fake: 0.461 
+(epoch: 18, iters: 7440, time: 0.165) G_GAN: 0.382 G_GAN_Feat: 2.969 G_VGG: 1.159 D_real: 0.252 D_fake: 1.109 
+(epoch: 18, iters: 7740, time: 0.165) G_GAN: 0.578 G_GAN_Feat: 2.832 G_VGG: 1.252 D_real: 0.336 D_fake: 0.504 
+(epoch: 18, iters: 8040, time: 0.165) G_GAN: 1.363 G_GAN_Feat: 2.840 G_VGG: 1.193 D_real: 0.738 D_fake: 0.128 
+(epoch: 18, iters: 8340, time: 0.165) G_GAN: 0.907 G_GAN_Feat: 3.094 G_VGG: 1.456 D_real: 0.619 D_fake: 0.291 
+(epoch: 18, iters: 8640, time: 0.165) G_GAN: 0.473 G_GAN_Feat: 2.895 G_VGG: 1.189 D_real: 0.383 D_fake: 0.674 
+(epoch: 18, iters: 8940, time: 0.165) G_GAN: 0.488 G_GAN_Feat: 3.158 G_VGG: 1.389 D_real: 0.401 D_fake: 0.639 
+(epoch: 18, iters: 9240, time: 0.165) G_GAN: 0.657 G_GAN_Feat: 2.675 G_VGG: 1.153 D_real: 0.400 D_fake: 0.426 
+(epoch: 18, iters: 9540, time: 0.165) G_GAN: 0.675 G_GAN_Feat: 2.938 G_VGG: 1.169 D_real: 0.356 D_fake: 0.422 
+(epoch: 18, iters: 9840, time: 0.165) G_GAN: 0.988 G_GAN_Feat: 2.928 G_VGG: 1.415 D_real: 0.549 D_fake: 0.297 
+Acc: 91.07789173722267
+End of epoch 18 / 200 	 Time Taken: 1649 sec
+saving the model at the end of epoch 18, iters 179928
+(epoch: 19, iters: 144, time: 0.200) G_GAN: 1.019 G_GAN_Feat: 2.783 G_VGG: 1.061 D_real: 0.427 D_fake: 0.350 
+(epoch: 19, iters: 444, time: 0.164) G_GAN: 0.773 G_GAN_Feat: 3.541 G_VGG: 1.349 D_real: 0.300 D_fake: 0.358 
+(epoch: 19, iters: 744, time: 0.164) G_GAN: 0.616 G_GAN_Feat: 2.687 G_VGG: 1.145 D_real: 0.363 D_fake: 0.442 
+(epoch: 19, iters: 1044, time: 0.165) G_GAN: 0.772 G_GAN_Feat: 3.424 G_VGG: 1.484 D_real: 0.309 D_fake: 0.395 
+(epoch: 19, iters: 1344, time: 0.165) G_GAN: 0.795 G_GAN_Feat: 2.979 G_VGG: 1.309 D_real: 0.392 D_fake: 0.331 
+(epoch: 19, iters: 1644, time: 0.165) G_GAN: 0.597 G_GAN_Feat: 3.086 G_VGG: 1.269 D_real: 0.348 D_fake: 0.477 
+(epoch: 19, iters: 1944, time: 0.165) G_GAN: 0.866 G_GAN_Feat: 2.861 G_VGG: 1.159 D_real: 0.322 D_fake: 0.315 
+(epoch: 19, iters: 2244, time: 0.165) G_GAN: 0.741 G_GAN_Feat: 2.930 G_VGG: 1.241 D_real: 0.496 D_fake: 0.376 
+(epoch: 19, iters: 2544, time: 0.165) G_GAN: 0.878 G_GAN_Feat: 3.043 G_VGG: 1.171 D_real: 0.176 D_fake: 0.455 
+(epoch: 19, iters: 2844, time: 0.165) G_GAN: 1.013 G_GAN_Feat: 3.109 G_VGG: 1.176 D_real: 0.266 D_fake: 0.262 
+(epoch: 19, iters: 3144, time: 0.165) G_GAN: 1.777 G_GAN_Feat: 2.924 G_VGG: 1.094 D_real: 0.784 D_fake: 0.211 
+(epoch: 19, iters: 3444, time: 0.165) G_GAN: 0.576 G_GAN_Feat: 3.080 G_VGG: 1.255 D_real: 0.336 D_fake: 0.522 
+(epoch: 19, iters: 3744, time: 0.165) G_GAN: 0.930 G_GAN_Feat: 3.046 G_VGG: 1.381 D_real: 0.540 D_fake: 0.270 
+(epoch: 19, iters: 4044, time: 0.165) G_GAN: 1.000 G_GAN_Feat: 3.494 G_VGG: 1.581 D_real: 0.410 D_fake: 0.266 
+(epoch: 19, iters: 4344, time: 0.165) G_GAN: 0.632 G_GAN_Feat: 3.060 G_VGG: 1.222 D_real: 0.353 D_fake: 0.472 
+(epoch: 19, iters: 4644, time: 0.165) G_GAN: 0.945 G_GAN_Feat: 3.037 G_VGG: 1.397 D_real: 0.649 D_fake: 0.265 
+(epoch: 19, iters: 4944, time: 0.165) G_GAN: 0.766 G_GAN_Feat: 3.013 G_VGG: 1.444 D_real: 0.484 D_fake: 0.339 
+(epoch: 19, iters: 5244, time: 0.165) G_GAN: 0.683 G_GAN_Feat: 3.015 G_VGG: 1.303 D_real: 0.374 D_fake: 0.420 
+(epoch: 19, iters: 5544, time: 0.165) G_GAN: 1.026 G_GAN_Feat: 2.916 G_VGG: 1.180 D_real: 0.635 D_fake: 0.227 
+(epoch: 19, iters: 5844, time: 0.165) G_GAN: 0.784 G_GAN_Feat: 3.670 G_VGG: 1.530 D_real: 0.363 D_fake: 0.333 
+(epoch: 19, iters: 6144, time: 0.165) G_GAN: 1.120 G_GAN_Feat: 3.518 G_VGG: 1.739 D_real: 0.319 D_fake: 0.321 
+(epoch: 19, iters: 6444, time: 0.165) G_GAN: 0.703 G_GAN_Feat: 2.980 G_VGG: 1.155 D_real: 0.379 D_fake: 0.389 
+(epoch: 19, iters: 6744, time: 0.165) G_GAN: 0.771 G_GAN_Feat: 3.141 G_VGG: 1.304 D_real: 0.309 D_fake: 0.346 
+(epoch: 19, iters: 7044, time: 0.165) G_GAN: 0.639 G_GAN_Feat: 3.669 G_VGG: 1.574 D_real: 0.304 D_fake: 0.453 
+(epoch: 19, iters: 7344, time: 0.165) G_GAN: 0.578 G_GAN_Feat: 3.353 G_VGG: 1.495 D_real: 0.226 D_fake: 0.553 
+(epoch: 19, iters: 7644, time: 0.165) G_GAN: 0.703 G_GAN_Feat: 3.145 G_VGG: 1.450 D_real: 0.366 D_fake: 0.410 
+(epoch: 19, iters: 7944, time: 0.165) G_GAN: 0.575 G_GAN_Feat: 3.654 G_VGG: 1.802 D_real: 0.299 D_fake: 0.497 
+(epoch: 

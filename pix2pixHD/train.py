@@ -75,7 +75,7 @@ for epoch in range(start_epoch, opt.niter + opt.niter_decay + 1):
 
         ############## Forward Pass ######################
         losses, generated = model(Variable(data['label']), Variable(data['inst']), 
-            Variable(data['image']), Variable(data['feat']), infer=True)
+            Variable(data['image']), Variable(data['feat']), infer=save_fake)
 
         # sum per device losses
         losses = [ torch.mean(x) if not isinstance(x, int) else x for x in losses ]
@@ -104,7 +104,7 @@ for epoch in range(start_epoch, opt.niter + opt.niter_decay + 1):
 
 
         # Compute acc for this batch
-        acumulate_acc += score(util.tensor2im(data['image'][0]), util.tensor2im(generated.data[0]))
+        # acumulate_acc += score(util.tensor2im(data['image'][0]), util.tensor2im(generated.data[0]))
 
         ############## Display results and errors ##########
         ### print out errors
@@ -117,10 +117,17 @@ for epoch in range(start_epoch, opt.niter + opt.niter_decay + 1):
 
         ### display output images
         if save_fake:
-            diff_image = util.tensor2im(data['image'][0]) - util.tensor2im(generated.data[0])
-            visuals = OrderedDict([('PSF', util.tensor2label(data['label'][0], opt.label_nc)),
-                                   ('Genereted', util.tensor2im(generated.data[0])),
-                                   ('Ricker', util.tensor2im(data['image'][0])),
+            
+            ricker = util.tensor2im(data['image'][0])
+            genereted = util.tensor2im(generated.data[0])
+            psf = util.tensor2label(data['label'][0], opt.label_nc)
+            
+            diff_image = ricker - genereted
+            print("Acc:", score(ricker, genereted))
+            
+            visuals = OrderedDict([('PSF', psf),
+                                   ('Genereted', genereted),
+                                   ('Ricker', ricker),
                                    ('Difference', diff_image)])
             visualizer.display_current_results(visuals, epoch, total_steps)
 
@@ -135,14 +142,14 @@ for epoch in range(start_epoch, opt.niter + opt.niter_decay + 1):
        
     # end of epoch 
     iter_end_time = time.time()
-    print('End of epoch %d / %d \t Time Taken: %d sec \t Acc: %d' %
-          (epoch, opt.niter + opt.niter_decay, time.time() - epoch_start_time, int(acumulate_acc/dataset_size) ))
+    print('End of epoch %d / %d \t Time Taken: %d sec' %
+          (epoch, opt.niter + opt.niter_decay, time.time() - epoch_start_time))
 
     ### save model for this epoch
     if epoch % opt.save_epoch_freq == 0:
         print('saving the model at the end of epoch %d, iters %d' % (epoch, total_steps))        
         model.module.save('latest')
-        # model.module.save(epoch)
+        model.module.save(epoch)
         np.savetxt(iter_path, (epoch+1, 0), delimiter=',', fmt='%d')
 
     ### instead of only training the local enhancer, train the entire network after certain iterations

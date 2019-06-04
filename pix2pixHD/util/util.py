@@ -16,14 +16,20 @@ def tensor2im(image_tensor, imtype=np.uint8, normalize=True):
             image_numpy.append(tensor2im(image_tensor[i], imtype, normalize))
         return image_numpy
     image_numpy = image_tensor.cpu().float().numpy()
-    if normalize:
-        image_numpy = (np.transpose(image_numpy, (1, 2, 0)) + 1) / 2.0 * 255.0
-    else:
-        image_numpy = np.transpose(image_numpy, (1, 2, 0)) * 255.0      
-    image_numpy = np.clip(image_numpy, 0, 255)
+    image_numpy = np.transpose(image_numpy, (1, 2, 0))
+    
+    # print("My Shape:", image_numpy.shape, image_numpy.min(), image_numpy.max())
+    
+    #if normalize:
+    #    image_numpy = np.transpose(image_numpy, (1, 2, 0))
+    #else:
+        
+    # image_numpy = np.clip(image_numpy, 0, 255)
     if image_numpy.shape[2] == 1 or image_numpy.shape[2] > 3:        
         image_numpy = image_numpy[:,:,0]
-    return image_numpy.astype(imtype)
+    
+    # print("CONVERSOR --- Min and Max:", image_numpy.min(), image_numpy.max(), image_numpy.shape)
+    return image_numpy
 
 # Converts a one-hot tensor into a colorful label map
 def tensor2label(label_tensor, n_label, imtype=np.uint8):
@@ -41,10 +47,15 @@ def tensor2label(label_tensor, n_label, imtype=np.uint8):
 #    image_pil.save(image_path)
     
 
+def to_gray(img):
+    # RGB to gray
+    tmp = img[0, ...] * 0.299 + img[1, ...] * 0.587 + img[2, ...] * 0.114
+    return tmp.unsqueeze(0)
+    
+    
 def save_image(img, image_path):
-    # print("Max:", img.max(), "Min:", img.min(), img.shape)
-    img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-    plt.imsave(image_path, img, cmap='seismic', vmin=0, vmax=255)
+    # print("SAVE --- Max:", img.max(), "Min:", img.min(), img.shape)
+    plt.imsave(image_path, img, cmap='seismic', vmin=-1, vmax=1)
 
 
 def mkdirs(paths):

@@ -414,6 +414,18 @@ class Vgg19(torch.nn.Module):
                 param.requires_grad = False
 
     def forward(self, X):
+        # print( "VGG:", X.shape, X.min(), X.max() )
+        X = torch.repeat_interleave(X, 3, 1)
+        """if a.shape[2] != 3:
+            X = np.zeros((a.shape[0], 3, a.shape[2], a.shape[3]), dtype=a.dtype) 
+            X[:,0] = a[:, 0]
+            X[:,1] = a[:, 0]
+            X[:,2] = a[:, 0]
+        else:
+            X = a"""
+        
+        # print( "VGG:", X.shape, X.min(), X.max() )
+        
         h_relu1 = self.slice1(X)
         h_relu2 = self.slice2(h_relu1)        
         h_relu3 = self.slice3(h_relu2)        
