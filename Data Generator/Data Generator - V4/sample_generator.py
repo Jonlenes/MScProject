@@ -39,7 +39,7 @@ def load_angles():
 
 
 dt = 0.004
-frequency = 20 #random.randint(5, 25)
+frequency = 50 #random.randint(5, 25)
 radians = load_angles()
 
 # All configs need before data generation 
