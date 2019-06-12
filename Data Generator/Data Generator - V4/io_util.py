@@ -26,9 +26,13 @@ def show(img, title='title', scala=1, color='gray', vmin=None, vmax=None, show_a
         
         
 def save(img, path, color=None, vmin=None, vmax=None, use_out_folder=True):
+    np.save(path, img)
+    
+    """
     if vmin is None and color == 'seismic':
         vmax = abs(img).max()
         vmin = -vmax
     if use_out_folder:
         path = output_folder + path
-    plt.imsave(path, img, cmap=color, vmin=vmin, vmax=vmax)
+    plt.imsave(path, img, cmap=color, vmin=vmin, vmax=vmax) 
+    """
