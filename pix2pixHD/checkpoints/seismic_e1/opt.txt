@@ -1,5 +1,5 @@
 ------------ Options -------------
-batchSize: 512
+batchSize: 1
 beta1: 0.5
 checkpoints_dir: ./checkpoints
 continue_train: False
@@ -41,7 +41,7 @@ ngf: 64
 niter: 100
 niter_decay: 100
 niter_fix_global: 0
-no_flip: False
+no_flip: True
 no_ganFeat_loss: False
 no_html: False
 no_instance: True
