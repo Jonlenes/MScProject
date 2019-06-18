@@ -89,8 +89,8 @@ def create_dataset(n_samples):
     Parallel(n_jobs=nc)(delayed(process_sample) (i, path) for i in tqdm(range(0, total_datas, samples_by_data)))
     
     # Load data paths
-    if aligned: data_paths = glob(path + "/*.png")
-    else: data_paths = glob(path + "/A/*.png")
+    if aligned: data_paths = glob(path + "/*")
+    else: data_paths = glob(path + "/A/*")
         
     # Shuffle the data 
     np.random.shuffle(data_paths)
@@ -104,10 +104,11 @@ def create_dataset(n_samples):
         else:    
             create_folder( folder_path + "_A")
             create_folder( folder_path + "_B")
-            
+      
+    
         # File names 
         data_paths_folder = data_paths[ start:start+folder[1] ]
-        
+
         # Move files
         for data_path in data_paths_folder:
             if aligned:
@@ -123,10 +124,10 @@ def create_dataset(n_samples):
         start += folder[1] 
         
         if not aligned: folder_path += "_A"
-        print("Total images of {0}: {1}".format(folder[0], len(glob(folder_path + "/*.png"))))
+        print("Total images of {0}: {1}".format(folder[0], len(glob(folder_path + "/*"))))
         
     print( timer.diff() )
 
 
 if __name__ == '__main__':
-    create_dataset(10000)
+    create_dataset(50)
