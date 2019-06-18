@@ -5,6 +5,9 @@ from data.base_dataset import BaseDataset, get_params, get_transform, normalize
 from data.image_folder import make_dataset
 # from PIL import Image
 import numpy as np
+import torchvision.transforms as transforms
+import torch
+
 
 class AlignedDataset(BaseDataset):
     def initialize(self, opt):
@@ -38,12 +41,16 @@ class AlignedDataset(BaseDataset):
     def __getitem__(self, index):        
         ### input A (label maps)
         A_path = self.A_paths[index]              
-        A = np.load( A_path )
+        A = torch.from_numpy( np.load( A_path ).astype(np.float64) ).double()
+
+        # print( transforms.ToTensor()(A).shape ) 
+        comp_trans = transforms.Compose( [transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))] )
+
         # A = Image.open(A_path)        
         params = get_params(self.opt, A.size)
         if self.opt.label_nc == 0:
-            transform_A = get_transform(self.opt, params)
-            A_tensor = transform_A( A )
+            # transform_A = get_transform(self.opt, params)
+            A_tensor = comp_trans( A )
         # else:
         #    transform_A = get_transform(self.opt, params, method=Image.NEAREST, normalize=False)
         #    A_tensor = transform_A(A) * 255.0
@@ -52,10 +59,10 @@ class AlignedDataset(BaseDataset):
         ### input B (real images)
         if self.opt.isTrain or self.opt.use_encoded_image:
             B_path = self.B_paths[index]   
-            B = np.load( B_path )
+            B = torch.from_numpy( np.load( B_path ).astype(np.float64) ).double()
             # B = Image.open(B_path).convert('RGB')
-            transform_B = get_transform(self.opt, params)      
-            B_tensor = transform_B(B)
+            # transform_B = get_transform(self.opt, params)      
+            B_tensor = comp_trans( B )
 
         ### if using instance maps        
         """if not self.opt.no_instance:

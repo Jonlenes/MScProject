@@ -17,7 +17,7 @@ class BaseDataset(data.Dataset):
         pass
 
 def get_params(opt, size):
-    w, h = size
+    w, h = 512, 512 # GATO
     new_h = h
     new_w = w
     if opt.resize_or_crop == 'resize_and_crop':
@@ -71,7 +71,7 @@ def __make_power_2(img, base, method=Image.BICUBIC):
     return img.resize((w, h), method)
 
 def __scale_width(img, target_width, method=Image.BICUBIC):
-    ow, oh = img.size
+    ow, oh = img.shape
     if (ow == target_width):
         return img    
     w = target_width
