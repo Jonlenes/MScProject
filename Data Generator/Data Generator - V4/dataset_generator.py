@@ -42,7 +42,7 @@ def process_sample(index_block, path, xs=None, ys=None, data_name=None):
         data_ricker, data_psf, data_name = sg.get_sample()
         xs, ys = split_data(data_ricker, data_psf)
     
-    img_path = path + "/{0}{1}_" + data_name.split(":")[0] + ".png"
+    img_path = path + "/{0}{1}_" + data_name.split(":")[0]
     
     for i, (x, y) in enumerate(zip(xs, ys)):
         if aligned:
