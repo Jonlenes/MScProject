@@ -1,5 +1,5 @@
 ------------ Options -------------
-batchSize: 1
+batchSize: 24
 beta1: 0.5
 checkpoints_dir: ./checkpoints
 continue_train: False
@@ -11,7 +11,7 @@ display_winsize: 512
 feat_num: 3
 fineSize: 512
 fp16: False
-gpu_ids: [0]
+gpu_ids: [0, 1, 2, 3]
 input_nc: 1
 instance_feat: False
 isTrain: True
@@ -25,7 +25,7 @@ local_rank: 0
 lr: 0.0002
 max_dataset_size: inf
 model: pix2pixHD
-nThreads: 8
+nThreads: 32
 n_blocks_global: 9
 n_blocks_local: 3
 n_clusters: 10

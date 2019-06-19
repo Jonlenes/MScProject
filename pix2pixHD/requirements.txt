@@ -1,5 +1,4 @@
 absl-py==0.2.2
-apex==0.1
 astor==0.7.1
 certifi==2018.8.24
 cffi==1.11.5
