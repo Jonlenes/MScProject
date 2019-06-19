@@ -130,4 +130,4 @@ def create_dataset(n_samples):
 
 
 if __name__ == '__main__':
-    create_dataset(50)
+    create_dataset(10000)

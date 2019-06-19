@@ -54,7 +54,7 @@ class AlignedDataset(BaseDataset):
         # A = Image.open(A_path)        
         params = get_params(self.opt, A.size)
         if self.opt.label_nc == 0:
-            ta = get_transform(self.opt, params)
+            ta = get_transform(self.opt, params, normalize=False)
             A_tensor = ta( A )
         # else:
         #    transform_A = get_transform(self.opt, params, method=Image.NEAREST, normalize=False)
@@ -66,7 +66,7 @@ class AlignedDataset(BaseDataset):
             B_path = self.B_paths[index]   
             B = self.load_data( B_path )
             # B = Image.open(B_path).convert('RGB')
-            tb = get_transform(self.opt, params)      
+            tb = get_transform(self.opt, params, normalize=False)      
             B_tensor = tb( B )
 
         ### if using instance maps        
