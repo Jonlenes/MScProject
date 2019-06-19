@@ -1,4 +1,0 @@
-pip3 install torch torchvision opencv-python
-git clone --recursive https://github.com/NVIDIA/apex.git
-cd apex && pip3 install .
-cd .. && rm -rf apex
